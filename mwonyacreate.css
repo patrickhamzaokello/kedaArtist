@@ -4,6 +4,7 @@
 
 * {
   box-sizing: border-box;
+  caret-color: rgba(0,0,0,0);
 }
 
 /* ----------------------------------------------
@@ -574,8 +575,8 @@ nav {
   padding: 17px;
   border-radius: 50px;
   outline: none;
-  background: #229c27;
-  border: #1d980b;
+  background: #6a3ab7;
+  border: #6a3ab7;
   margin: 2em 0;
 }
 
@@ -592,8 +593,8 @@ nav {
 }
 
 .createartistbutton:hover {
-  background: #229c27;
-  border: #1d980b;
+  background: #39035e;
+  border: #39035e;
   transition: 0.3s;
 }
 
@@ -605,14 +606,12 @@ input[type="file"]::file-selector-button {
   border: none;
   border-radius: 0.2em;
   background-color: #131313;
-  transition: 1s;
   color: white;
   padding: 1em 2em;
 }
 
 input[type="file"]::file-selector-button:hover {
-  background-color: #81ecec;
-  border: 2px solid #00cec9;
+  background-color: #520a7c;
 }
 
 .enjoymusicbutton {
@@ -982,7 +981,7 @@ h3 {
   margin: 2em 0;
   padding: 1em;
   color: white;
-  background-color: #5e0b88;
+  background-color: #e9e9e9;
 }
 
 .albumtitletext h5 {
@@ -1010,6 +1009,7 @@ h3 {
   width: 160px;
   height: 160px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 #file-upload-button {
@@ -1371,7 +1371,7 @@ h3 {
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
   /* background: #3e154f1c; */
-  background: #320e4259;
+  background: #fff;
 }
 
 ::-webkit-scrollbar {
@@ -1700,6 +1700,7 @@ textarea {
   border: 1px solid lightblue;
   background: #f2f2f2;
   color: #636363;
+  border-radius: 5px;
 }
 
 .disabledinput {
@@ -1727,7 +1728,7 @@ label {
   max-width: 100%;
   margin-bottom: 5px;
   color: #100d0d;
-  font-weight: bold;
+  font-weight: initial;
 }
 
 .createbutton {
@@ -1773,8 +1774,9 @@ section {
 }
 
 .signuplink {
-  padding: 10px;
-  background: #fdd835;
+  /* padding: 10px; */
+  margin: 20px 0;
+  /* background: #ece0ff; */
   color: #2d1919;
 }
 
@@ -1785,7 +1787,7 @@ section {
 }
 
 .signuplink a:hover {
-  color: orange;
+  color: #9800da;
 }
 
 form h3 {
@@ -1799,11 +1801,18 @@ form h3 {
   color: black;
 }
 
+.leftsideupload {
+  position: absolute;
+  width: 50vw;
+  padding: 2em;
+  right: 0;
+}
+
 .inputfield {
   margin-bottom: 0.7em;
-  font-size: 17px;
+  font-size: 14px;
   font-family: montserrat;
-  border: 1px solid #7240a9;
+  border: 1px solid #e7e7e7;
 }
 
 button:hover,
@@ -1832,11 +1841,13 @@ span[role="link"] {
 
 form button {
   display: block;
+  border-radius: 5px;
+
 }
 
 #loginbutton {
-  background: #21c128;
-  padding: 10px;
+  background: #381b56;
+  padding: 20px 10px;
   color: #ffffff;
   text-transform: uppercase;
   border: none;
@@ -1845,7 +1856,7 @@ form button {
 }
 
 #loginbutton:hover {
-  background: #e23d70;
+  background: #6400cf;
 }
 
 .helpbutton {
@@ -2914,5 +2925,87 @@ h1 {
     box-shadow: 0 6px 15px rgb(36 37 38 / 8%);
     width: 508px;
     margin: 0 auto;
+  }
+}
+
+
+/* new css */
+
+.SidePanelWrapper_dialog__ERXxW {
+  background-color: #fff;
+  border: 1px solid #d1d1d7;
+  border-radius: 0;
+  box-shadow: 0 2px 8px 2px rgb(10 10 22 / 30%);
+  box-sizing: border-box;
+  color: #23232d;
+  display: inline-block;
+  min-height: 100%;
+  padding: 30px 15%;
+  position: relative;
+  width: 50vw;
+  z-index: 7030;
+}
+
+.loginformui {
+  background-color: #fff;
+  border-radius: inherit;
+  height: 100%;
+  max-height: 100vh;
+  overflow: auto;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+.loginscreeen {
+  margin-top: 2em;
+}
+
+.SidePanelWrapper_wrapper__2Qh_A {
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: fixed;
+  right: 0;
+  text-align: left;
+  top: 0;
+  vertical-align: middle;
+  z-index: 7020;
+}
+
+.SidePanelWrapper_scrollable-wrapper__26f9j {
+  -ms-overflow-style: none;
+  background-color: #fff;
+  border-radius: inherit;
+  height: 100%;
+  max-height: 100vh;
+  overflow: auto;
+  scrollbar-width: none;
+  width: 100%;
+}
+
+.SidePanelWrapper_scrollable-wrapper__26f9j::-webkit-scrollbar {
+  display: none;
+}
+
+.SidePanelWrapper_scrollable-wrapper__26f9j::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+.SidePanelWrapper_scrollable-wrapper__26f9j::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.LoginForm_container__sUvUd {
+  box-sizing: border-box;
+  margin: auto;
+  padding: 52px 0;
+  position: relative;
+}
+
+@media only screen and (min-width: 1224px) {
+  .SidePanelWrapper_wrapper__2Qh_A {
+      width: 50vw;
   }
 }

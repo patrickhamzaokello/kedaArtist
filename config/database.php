@@ -18,10 +18,6 @@ if ($local) {
 
 $con = mysqli_connect($hostname, $username, $password, $databasename);
 
-// Check connection
-if (mysqli_connect_errno($con)) {
-    echo "MySQL database connection failed: " . mysqli_connect_error();
-}
 
 
 try {
