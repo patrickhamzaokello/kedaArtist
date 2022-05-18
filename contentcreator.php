@@ -6,10 +6,6 @@
 <?php
 
 include("config/global.php");
-// echo $artistname;
-
-// echo $artistid;
-// echo $contenttag;
 include("uploadscripts/artistupload.php");
 
 

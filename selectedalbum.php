@@ -2,7 +2,7 @@
 
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 
-    include("includes/config.php");
+    include("config/database.php");
     include("includes/classes/User.php");
     include("includes/classes/Artist.php");
     include("includes/classes/Album.php");
@@ -10,8 +10,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
     include("includes/classes/Playlist.php");
     include("includes/classes/LikedSong.php");
 
-    $db = new Database();
-    $con = $db->getConnString();
+   
     if (isset($_GET['userLoggedIn'])) {
         $userLoggedIn = new User($con, $_GET['userLoggedIn']);
     } else {
