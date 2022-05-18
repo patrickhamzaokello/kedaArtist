@@ -37,19 +37,20 @@ if (isset($_POST["submit"])) {
 
     $firstthreeletters = substr(rand(), 0, 3);
     $id = "m_al" . uniqid() . $firstthreeletters;
+    $dirpath = realpath(dirname(getcwd().DIRECTORY_SEPARATOR));
 
 
     if ($contenttype == 'music') {
-        $target_dir = "../assets/images/artwork/";
+        $target_dir = $dirpath."/assets/images/artwork/";
         $dbtarget_dir = "assets/images/artwork/";
     } elseif ($contenttype == 'podcast') {
-        $target_dir = "../assets/images/podcastalbumartwork/";
+        $target_dir = $dirpath."/assets/images/podcastalbumartwork/";
         $dbtarget_dir = "assets/images/podcastalbumartwork/";
     } elseif ($contenttype == 'dj') {
-        $target_dir = "../assets/images/podcastalbumartwork/";
+        $target_dir = $dirpath."/assets/images/podcastalbumartwork/";
         $dbtarget_dir = "assets/images/podcastalbumartwork/";
     } elseif ($contenttype == 'poem') {
-        $target_dir = "../assets/images/poemsartwork/";
+        $target_dir = $dirpath."/assets/images/poemsartwork/";
         $dbtarget_dir = "assets/images/poemsartwork/";
     } else {
         echo "Media Tag is Not Provided";
