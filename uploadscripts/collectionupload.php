@@ -37,20 +37,20 @@ if (isset($_POST["submit"])) {
 
     $firstthreeletters = substr(rand(), 0, 3);
     $id = "m_al" . uniqid() . $firstthreeletters;
-    $dirpath = realpath(dirname(getcwd().DIRECTORY_SEPARATOR));
+     $dirpath = realpath(dirname(getcwd().DIRECTORY_SEPARATOR));
 
 
     if ($contenttype == 'music') {
-        $target_dir = $dirpath."/assets/images/artwork/";
+        $target_dir = "assets/images/artwork/";
         $dbtarget_dir = "assets/images/artwork/";
     } elseif ($contenttype == 'podcast') {
-        $target_dir = $dirpath."/assets/images/podcastalbumartwork/";
+        $target_dir = "assets/images/podcastalbumartwork/";
         $dbtarget_dir = "assets/images/podcastalbumartwork/";
     } elseif ($contenttype == 'dj') {
-        $target_dir = $dirpath."/assets/images/podcastalbumartwork/";
+        $target_dir = "assets/images/podcastalbumartwork/";
         $dbtarget_dir = "assets/images/podcastalbumartwork/";
     } elseif ($contenttype == 'poem') {
-        $target_dir = $dirpath."/assets/images/poemsartwork/";
+        $target_dir = "assets/images/poemsartwork/";
         $dbtarget_dir = "assets/images/poemsartwork/";
     } else {
         echo "Media Tag is Not Provided";
@@ -110,15 +110,15 @@ if (isset($_POST["submit"])) {
             if ($stmt->execute()) {
                 $resMessage = array(
                     "status" => "alert-success",
-                    "message" => $target_file
+                    "message" => "Image uploaded successfully."
                 );
 
-                // header("Location:uploadmedia");
+                header("Location:uploadmedia");
             }
         } else {
             $resMessage = array(
                 "status" => "alert-danger",
-                "message" => $target_file
+                "message" => "Image coudn't be uploaded."
             );
         }
     }
