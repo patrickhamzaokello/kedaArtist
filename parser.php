@@ -20,17 +20,17 @@ if (isset($_POST["username"])) {
     foreach ($_FILES as $file) {
 
         if ($tag == 'music') {
-            $target_file = "../assets/music/" . $file['name'];
-            $dbtarget_file = "assets/music/" . $file['name'];
+            $target_file = "assets/music/" . $file['name'];
+            $dbtarget_file = "https://artist.mwonyaa.com/assets/music/" . $file['name'];
         } elseif ($tag == 'podcast') {
-            $target_file = "../assets/podcasts/" . $file['name'];
-            $dbtarget_file = "assets/podcasts/" . $file['name'];
+            $target_file = "assets/podcasts/" . $file['name'];
+            $dbtarget_file = "https://artist.mwonyaa.com/assets/podcasts/" . $file['name'];
         } elseif ($tag == 'dj') {
-            $target_file = "../assets/djmixes/" . $file['name'];
-            $dbtarget_file = "assets/djmixes/" . $file['name'];
+            $target_file = "assets/djmixes/" . $file['name'];
+            $dbtarget_file = "https://artist.mwonyaa.com/assets/djmixes/" . $file['name'];
         } elseif ($tag == 'poem') {
-            $target_file = "../assets/poems/" . $file['name'];
-            $dbtarget_file = "assets/poems/" . $file['name'];
+            $target_file = "assets/poems/" . $file['name'];
+            $dbtarget_file = "https://artist.mwonyaa.com/assets/poems/" . $file['name'];
         } else {
             echo "Media Tag is Not Provided";
             return;
