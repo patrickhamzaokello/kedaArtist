@@ -42,16 +42,16 @@ if (isset($_POST["submit"])) {
 
     if ($contenttype == 'music') {
         $target_dir = "assets/images/artwork/";
-        $dbtarget_dir = "assets/images/artwork/";
+        $dbtarget_dir = "https://artist.mwonyaa.com/assets/images/artwork/";
     } elseif ($contenttype == 'podcast') {
         $target_dir = "assets/images/podcastalbumartwork/";
-        $dbtarget_dir = "assets/images/podcastalbumartwork/";
+        $dbtarget_dir = "https://artist.mwonyaa.com/assets/images/podcastalbumartwork/";
     } elseif ($contenttype == 'dj') {
         $target_dir = "assets/images/podcastalbumartwork/";
-        $dbtarget_dir = "assets/images/podcastalbumartwork/";
+        $dbtarget_dir = "https://artist.mwonyaa.com/assets/images/podcastalbumartwork/";
     } elseif ($contenttype == 'poem') {
         $target_dir = "assets/images/poemsartwork/";
-        $dbtarget_dir = "assets/images/poemsartwork/";
+        $dbtarget_dir = "https://artist.mwonyaa.com/assets/images/poemsartwork/";
     } else {
         echo "Media Tag is Not Provided";
         return;
