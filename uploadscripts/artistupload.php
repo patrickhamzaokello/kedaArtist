@@ -8,7 +8,7 @@ include("config/database.php");
 
 if (isset($_POST["submit"])) {
     $target_dir = "assets/images/artistprofiles/";
-    $dbtarget_dir = "assets/images/artistprofiles/";
+    $dbtarget_dir = "https://artist.mwonyaa.com/assets/images/artistprofiles/";
 
 
     //Get Artist
