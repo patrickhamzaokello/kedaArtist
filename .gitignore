@@ -1,0 +1,11 @@
+/assets/images/
+/assets/adsaudio/
+/assets/music/
+/assets/djmixes/
+/assets/podcasts/
+/assets/poems/
+/bootstrap/
+/node_modules/
+/storage/
+/vendor/
+/.env/

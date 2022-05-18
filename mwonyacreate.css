@@ -562,11 +562,12 @@ nav {
 }
 
 .alert-danger {
-  border: 1px solid #ff1a0b;
+  border: 1px solid #ffcdca;
   padding: 1em;
   color: black;
-  background: #ffbdae;
+  background: #fff9f7;
 }
+
 
 .createartistbutton {
   width: 100% !important;
@@ -801,7 +802,6 @@ button:hover {
   justify-content: space-evenly;
   flex-wrap: wrap;
   align-items: center;
-  height: 85vh;
   background-image: url(herobackvector.svg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -1701,6 +1701,8 @@ textarea {
   background: #f2f2f2;
   color: #636363;
   border-radius: 5px;
+  caret-color: rgb(119, 0, 255);
+
 }
 
 .disabledinput {
@@ -2940,7 +2942,7 @@ h1 {
   color: #23232d;
   display: inline-block;
   min-height: 100%;
-  padding: 30px 15%;
+  padding: 0px 15%;
   position: relative;
   width: 50vw;
   z-index: 7030;
@@ -3007,5 +3009,13 @@ h1 {
 @media only screen and (min-width: 1224px) {
   .SidePanelWrapper_wrapper__2Qh_A {
       width: 50vw;
+  }
+}
+
+@media only screen and (max-width: 786px) {
+
+  .SidePanelWrapper_dialog__ERXxW {
+    width: 100vw;
+    padding: 0px 5%;
   }
 }

@@ -105,7 +105,7 @@ include("uploadscripts/artistupload.php");
 
 
                         <div class="contheadingtile">
-                            <h4>Mwonyaa Creator </h4>
+                            <h4>Artist Signup </h4>
                             <p>Become a content creator on Mwonyaa and start Sharing your Content on the Mwonyaa Stream
                                 Platform
                             </p>
@@ -134,12 +134,12 @@ include("uploadscripts/artistupload.php");
                             </div>
                             <div class="form-group">
                                 <label class="artistlabel" for="artistFacebookurl">Facebook Url </label>
-                                <input type="text" name="artistFacebookurl" class="inputfield" id="artistFacebookurl" aria-describedby="nameHelp" placeholder="Facebook Url" required>
+                                <input type="text" name="artistFacebookurl" class="inputfield" id="artistFacebookurl" aria-describedby="nameHelp" placeholder="Facebook Url" >
                                 <label class="artistlabel" for="artistInstagramurl">Instagram Url</label>
-                                <input type="text" name="artistInstagramurl" class="inputfield" id="artistInstagramurl" aria-describedby="nameHelp" placeholder="Instagram Url" required>
+                                <input type="text" name="artistInstagramurl" class="inputfield" id="artistInstagramurl" aria-describedby="nameHelp" placeholder="Instagram Url">
 
                                 <label class="artistlabel" for="artistTwitterurl">Twitter Url</label>
-                                <input type="text" name="artistTwitterurl" class="inputfield" id="artistTwitterurl" aria-describedby="nameHelp" placeholder="Twitter Url" required>
+                                <input type="text" name="artistTwitterurl" class="inputfield" id="artistTwitterurl" aria-describedby="nameHelp" placeholder="Twitter Url" >
                             </div>
 
 
