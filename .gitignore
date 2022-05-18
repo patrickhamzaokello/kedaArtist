@@ -4,6 +4,7 @@ assets/music/
 assets/djmixes/
 assets/podcasts/
 assets/poems/
+config/database.php
 bootstrap/
 node_modules/
 storage/
