@@ -110,15 +110,15 @@ if (isset($_POST["submit"])) {
             if ($stmt->execute()) {
                 $resMessage = array(
                     "status" => "alert-success",
-                    "message" => "Image uploaded successfully."
+                    "message" => $target_file
                 );
 
-                header("Location:uploadmedia");
+                // header("Location:uploadmedia");
             }
         } else {
             $resMessage = array(
                 "status" => "alert-danger",
-                "message" => "Image coudn't be uploaded."
+                "message" => $target_file
             );
         }
     }
