@@ -14,7 +14,7 @@ if (isset($_POST['albumID']) && isset($_POST['artworkPath']) && isset($_POST['us
     $query = mysqli_query($con, "DELETE FROM songs WHERE album='$albumid'");
     $query = mysqli_query($con, "DELETE FROM albums WHERE id='$albumid'");
 
-    unlink('../../' . $artworkPath);
+    unlink($artworkPath);
 
 
     // $query = mysqli_query($con, "DELETE FROM albums WHERE id='$albumid' AND songId = '$songId' ");

@@ -13,8 +13,8 @@ if (isset($_POST["username"])) {
     foreach ($_FILES as $file) {
 
 
-        $target_file = "../../assets/images/artwork/" . $file['name'];
-        $dbtarget_file = "assets/images/artwork/" . $file['name'];
+        $target_file = "assets/images/artwork/" . $file['name'];
+        $dbtarget_file = "https://artist.mwonyaa.com/assets/images/artwork/" . $file['name'];
 
 
         $path_parts = pathinfo($dbtarget_file);
