@@ -124,11 +124,11 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
     }
 
     function progressHandler(event) {
-        _("loaded_n_total").innerHTML = "Loaded " + Math.round(event.loaded * 0.000001) + " Mbs of " + Math.round(event
-            .total * 0.000001);
+        _("loaded_n_total").innerHTML = "(UpLoaded " + Math.round(event.loaded * 0.000001)  + " / "+ Math.round(event
+            .total * 0.000001)+ " Mbs)";
         var percent = (event.loaded / event.total) * 100;
         _("progressBar").value = Math.round(percent);
-        _("status").innerHTML = Math.round(percent) + "% Loading... please wait";
+        _("status").innerHTML = Math.round(percent) + " % Uploading... please wait";
     }
 
     function completeHandler(event) {
@@ -239,8 +239,8 @@ $albums = $stmtalbum->fetchAll();
 
             <progress id="progressBar" value="0" max="100"></progress>
 
-            <h6 id="status" style="white-space: pre-line; line-height: 2em;" wrap="hard"></h6>
-            <p id="loaded_n_total"></p>
+            <h6 class="progressLoadingtext" id="status" wrap="hard"></h6>
+            <p id="loaded_n_total" class="progressupdateSize"></p>
 
         </form>
     </div>

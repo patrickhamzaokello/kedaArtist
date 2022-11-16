@@ -112,7 +112,7 @@ if (isset($_POST["username"])) {
 
 
                             echo
-                            $albumtitle . "<span class='checkeddone'>Done</span>" . "\n";
+                            $albumtitle . "<span class='checkeddone'> Uploaded Successfully </span>" . "\n";
                         } else {
                             echo "Media upload to Database Failed" . "\n";
                             continue;
