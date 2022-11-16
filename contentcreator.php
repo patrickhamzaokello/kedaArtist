@@ -147,7 +147,7 @@ include("uploadscripts/artistupload.php");
 
                             <div class="form-group">
                                 <label for="songGenre">Artist Genre <span class="required">*</span></label>
-                                <select id="songGenre" required class="inputfield">
+                                <select id="songGenre" name="songGenre" required class="inputfield">
                                     <option value="">Choose Genre</option>
                                     <?php foreach ($genres as $genre) : ?>
                                         <option value="<?= $genre['id']; ?>"><?= $genre['name']; ?></option>
