@@ -30,8 +30,8 @@ include("uploadscripts/artistupload.php");
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<!-- favicon -->
-<meta name="theme-color" content="#381b56" />
+    <!-- favicon -->
+    <meta name="theme-color" content="#381b56" />
     <link rel="shortcut icon" href="assets/favicon/favicon.ico">
     <meta name="msapplication-config" content="assets/favicon/browserconfig.xml">
     <link rel="apple-touch-icon" sizes="57x57" href="assets/favicon/apple-icon-57x57.png">
@@ -99,6 +99,28 @@ include("uploadscripts/artistupload.php");
                             </div>
                         <?php } ?>
 
+                        <?php
+
+                        //Our select statement. This will retrieve the data that we want.
+                        $sqlgenre = "SELECT id, name FROM genres ORDER BY `genres`.`name` ASC";
+
+                        //Prepare the select statement.
+                        $stmtgrenre = $conn->prepare($sqlgenre);
+
+
+
+
+                        //Execute the statement.
+                        $stmtgrenre->execute();
+
+
+                        //Retrieve the rows using fetchAll.
+                        $genres = $stmtgrenre->fetchAll();
+
+
+
+                        ?>
+
 
                         <div class="contheadingtile">
                             <h4>Artist Signup </h4>
@@ -123,6 +145,15 @@ include("uploadscripts/artistupload.php");
                             <label class="artistlabel" for="artistemail"> Artist Email <span class="required">*</span></label>
                             <input type="email" name="Artistemail" class="inputfield" id="artistemail" aria-describedby="nameHelp" placeholder="Enter Artist Email" required>
 
+                            <div class="form-group">
+                                <label for="songGenre">Artist Genre <span class="required">*</span></label>
+                                <select id="songGenre" required class="inputfield">
+                                    <option value="">Choose Genre</option>
+                                    <?php foreach ($genres as $genre) : ?>
+                                        <option value="<?= $genre['id']; ?>"><?= $genre['name']; ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
 
                             <div class="socialdetails">
                                 <h1>Social Details</h1>
@@ -130,12 +161,12 @@ include("uploadscripts/artistupload.php");
                             </div>
                             <div class="form-group">
                                 <label class="artistlabel" for="artistFacebookurl">Facebook Url </label>
-                                <input type="text" name="artistFacebookurl" class="inputfield" id="artistFacebookurl" aria-describedby="nameHelp" placeholder="Facebook Url" >
+                                <input type="text" name="artistFacebookurl" class="inputfield" id="artistFacebookurl" aria-describedby="nameHelp" placeholder="Facebook Url">
                                 <label class="artistlabel" for="artistInstagramurl">Instagram Url</label>
                                 <input type="text" name="artistInstagramurl" class="inputfield" id="artistInstagramurl" aria-describedby="nameHelp" placeholder="Instagram Url">
 
                                 <label class="artistlabel" for="artistTwitterurl">Twitter Url</label>
-                                <input type="text" name="artistTwitterurl" class="inputfield" id="artistTwitterurl" aria-describedby="nameHelp" placeholder="Twitter Url" >
+                                <input type="text" name="artistTwitterurl" class="inputfield" id="artistTwitterurl" aria-describedby="nameHelp" placeholder="Twitter Url">
                             </div>
 
 
@@ -160,7 +191,7 @@ include("uploadscripts/artistupload.php");
                                 </div>
                             </div>
 
-                         
+
 
 
                             <div class="socialdetails">

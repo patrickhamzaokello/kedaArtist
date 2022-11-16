@@ -19,8 +19,7 @@ if (isset($_POST["submit"])) {
     $email = $_POST['Artistemail'];
     $password = $_POST['Artistpassword'];
     $confirmPassword = $_POST['Artistconfirmpassword'];
-
-
+    $songGenre = $_POST['songGenre'];
 
     //social details
     $artistFacebookurl = $_POST['artistFacebookurl'];
@@ -105,7 +104,7 @@ if (isset($_POST["submit"])) {
                 );
             } else {
                 if (move_uploaded_file($_FILES["fileUpload"]["tmp_name"], $target_file) && move_uploaded_file($_FILES["coverUpload"]["tmp_name"], $covertarget_file)) {
-                    $sql = "INSERT INTO artists (id,name,email,phone, facebookurl, twitterurl, instagramurl,RecordLable,password,profilephoto,coverimage) VALUES ('$id','$artistname','$email','$phoneNO','$artistFacebookurl', '$artistTwitterurl', '$artistInstagramurl', '$recordLabel','$password','$dbtarget_file','$dbcovertarget_file')";
+                    $sql = "INSERT INTO artists (id,name,email,phone, facebookurl, twitterurl, instagramurl,RecordLable,password,profilephoto,coverimage,genre) VALUES ('$id','$artistname','$email','$phoneNO','$artistFacebookurl', '$artistTwitterurl', '$artistInstagramurl', '$recordLabel','$password','$dbtarget_file','$dbcovertarget_file','$songGenre')";
                     $stmt = $conn->prepare($sql);
                     if ($stmt->execute()) {
                         $resMessage = array(

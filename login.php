@@ -7,16 +7,18 @@ $message = "";
 if (count($_POST) > 0) {
     if (!empty($con)) {
         $result = mysqli_query($con, "SELECT * FROM artists WHERE  password = '" . $_POST["password"] . "' AND email='" . $_POST["emailUsername"] . "' or name='" . $_POST["emailUsername"] . "'");
+    
+        $row = mysqli_fetch_array($result);
+        if (is_array($row)) {
+            $_SESSION["id"] = $row['id'];
+            $_SESSION["name"] = $row['name'];
+            $_SESSION["genre"] = $row['genre'];
+            $_SESSION["tag"] = $row['tag'];
+        } else {
+            $message = "Invalid Username or Password!";
+        }
     }
-    $row = mysqli_fetch_array($result);
-    if (is_array($row)) {
-        $_SESSION["id"] = $row['id'];
-        $_SESSION["name"] = $row['name'];
-        $_SESSION["genre"] = $row['genre'];
-        $_SESSION["tag"] = $row['tag'];
-    } else {
-        $message = "Invalid Username or Password!";
-    }
+   
 }
 if (isset($_SESSION["id"])) {
 
