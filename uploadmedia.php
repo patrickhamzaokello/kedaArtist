@@ -109,8 +109,8 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
             formdata.append("songAlbum", songAlbum);
             formdata.append("songGenre", songGenre);
 
+            $('.uploadoverview').css('display', 'grid');
             $('#progressBar').css('display', 'block');
-
 
             var ajax = new XMLHttpRequest();
             ajax.upload.addEventListener("progress", progressHandler, false);
@@ -124,8 +124,8 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
     }
 
     function progressHandler(event) {
-        _("loaded_n_total").innerHTML = "(UpLoaded " + Math.round(event.loaded * 0.000001)  + " / "+ Math.round(event
-            .total * 0.000001)+ " Mbs)";
+        _("loaded_n_total").innerHTML = "(UpLoaded " + Math.round(event.loaded * 0.000001) + " / " + Math.round(event
+            .total * 0.000001) + " Mbs)";
         var percent = (event.loaded / event.total) * 100;
         _("progressBar").value = Math.round(percent);
         _("status").innerHTML = Math.round(percent) + " % Uploading... please wait";
@@ -237,11 +237,19 @@ $albums = $stmtalbum->fetchAll();
 
             <input class="uploadtracksbtn" type="button" value="Upload Files" onclick="uploadFiles()">
 
-            <progress id="progressBar" value="0" max="100"></progress>
 
-            <h6 class="progressLoadingtext" id="status" wrap="hard"></h6>
-            <p id="loaded_n_total" class="progressupdateSize"></p>
 
         </form>
     </div>
+</div>
+
+<div class="uploadoverview">
+    <div class="progressview">
+        <progress id="progressBar" value="0" max="100"></progress>
+
+        <h6 class="progressLoadingtext" id="status" wrap="hard"></h6>
+        <p id="loaded_n_total" class="progressupdateSize"></p>
+        <input class="uploadtracksbtn" type="button" value="Done" onclick="openPage('uploadmedia')">
+    </div>
+
 </div>

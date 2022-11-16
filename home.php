@@ -51,7 +51,7 @@ if (mysqli_num_rows($albumQuery) != 0) {
 
 <div class="create_container ">
     <div class="create_child_container">
-        <div class="activity">
+        <div class="activity" onclick="openPage('uploadmedia')">
             <div class="icon">
                 <svg width="50" height="50" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M9.75 66.3V11.7C9.75 11.1828 9.95545 10.6868 10.3211 10.3211C10.6868 9.95545 11.1828 9.75 11.7 9.75H66.3C66.8172 9.75 67.3132 9.95545 67.6789 10.3211C68.0446 10.6868 68.25 11.1828 68.25 11.7V66.3C68.25 66.8172 68.0446 67.3132 67.6789 67.6789C67.3132 68.0446 66.8172 68.25 66.3 68.25H11.7C11.1828 68.25 10.6868 68.0446 10.3211 67.6789C9.95545 67.3132 9.75 66.8172 9.75 66.3V66.3Z" stroke="#F8F8F8" stroke-width="4.875" />
@@ -64,7 +64,7 @@ if (mysqli_num_rows($albumQuery) != 0) {
 
         </div>
 
-        <div class="activity">
+        <div class="activity" onclick="openPage('uploadmedia')">
             <div class="icon">
                 <svg width="50" height="50" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M64.8537 13.1464C57.9969 6.28962 48.6971 2.4375 39.0001 2.4375C29.3031 2.4375 20.0032 6.28962 13.1464 13.1464C6.28962 20.0032 2.4375 29.3031 2.4375 39.0001C2.4375 48.6971 6.28962 57.9969 13.1464 64.8537C20.0032 71.7105 29.3031 75.5627 39.0001 75.5627C48.6971 75.5627 57.9969 71.7105 64.8537 64.8537C71.7105 57.9969 75.5627 48.6971 75.5627 39.0001C75.5627 29.3031 71.7105 20.0032 64.8537 13.1464V13.1464ZM39.0001 70.6876C21.5276 70.6876 7.31258 56.4725 7.31258 39.0001C7.31258 21.5276 21.5276 7.31258 39.0001 7.31258C56.4725 7.31258 70.6876 21.5276 70.6876 39.0001C70.6876 56.4725 56.4725 70.6876 39.0001 70.6876Z" fill="#F8F8F8" />
@@ -76,7 +76,7 @@ if (mysqli_num_rows($albumQuery) != 0) {
 
             <p>Add a new Music EP</p>
         </div>
-        <div class="activity">
+        <div class="activity" onclick="openPage('uploadmedia')">
 
             <div class="icon">
                 <svg width="50" height="50" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +91,7 @@ if (mysqli_num_rows($albumQuery) != 0) {
             <p>Add a new Music Album. </p>
         </div>
 
-        <div class="activity">
+        <div class="activity" onclick="openPage('uploadmedia')">
 
             <div class="icon">
                 <svg width="50" height="50" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">

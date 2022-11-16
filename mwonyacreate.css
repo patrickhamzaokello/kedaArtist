@@ -2008,10 +2008,16 @@ section {
 }
 
 .uploadtracksbtn {
-  background: #9f0159;
-  border: #9f0159;
+  background: #9c19d3;
+  border: #9c19d3;
   color: white;
   outline: none;
+}
+
+
+.uploadtracksbtn:hover{
+  background: #9f0159;
+  border: #9f0159;
 }
 
 progress[value] {
@@ -2028,25 +2034,59 @@ progress[value] {
 
 progress::-webkit-progress-bar {
   /* style rules */
-  background-color: #1f102d;
+  background-color: #D6F5E3;
+  border: 1px solid #0B9632;
 }
 
 progress::-webkit-progress-value {
   /* style rules */
-  background-color: rgba(36, 218, 0, 0.849);
+  background-color: #0B9632;
 }
 
-.progressLoadingtext{
-    text-align: center;
-    font-size: 12px;
-    color: #d9be00;
-    margin: 0;
-    padding: 1em;
-}
-
-.progressupdateSize{
+.progressLoadingtext {
   text-align: center;
-  color: #3eff70;
+  font-size: 12px;
+  color: #0d0112;
+  margin: 0;
+  padding: 1em;
+}
+
+.progressupdateSize {
+  text-align: center;
+  color: #78009f;
+  margin-bottom: 1em;
+}
+/* 
+.uploadovervieHHw {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  left: 50%;
+  right: 50%;
+  top: 50%;
+  bottom: 50%;
+  z-index: 5001;
+} */
+
+.uploadoverview {
+  position: fixed;
+  background: #00000099;
+  display: grid;
+  place-content: center;
+  top: 50px;
+  display: none;
+  margin: 0 -1em !important;
+  width: 70%;
+  height: calc(100vh - 50px);
+  height: -webkit-calc(100vh - 50px);
+  height: -moz-calc(100vh - 50px);
+}
+
+.progressview {
+  width: 350px;
+  background: #e8eaf6;
+  padding: 2em;
+  border-radius: 10px;
 }
 
 .signuplink {
