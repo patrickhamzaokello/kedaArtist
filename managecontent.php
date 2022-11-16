@@ -70,7 +70,7 @@ if(!isset($_SESSION["name"])){
 
     <link rel="stylesheet" href="mwonyacreate.css">
     <!-- <link rel="stylesheet" href="vanillaupload.css"> -->
-    <title>Mwonyaa Manage content</title>
+    <title>Mwonya Content Platform</title>
 
 
     <style>
@@ -86,7 +86,7 @@ if(!isset($_SESSION["name"])){
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Mwonyaa Artist - Management Platform</a>
+                <a class="navbar-brand" href="#">Mwonya Content Management Platform</a>
             </div>
         </div>
     </nav>

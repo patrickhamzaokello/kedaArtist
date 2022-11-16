@@ -142,193 +142,102 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 
 
 <?php
-if ($contenttag == "music") {
 
-    //Our select statement. This will retrieve the data that we want.
-    $sqlgenre = "SELECT id, name FROM genres where tag='music' ORDER BY `genres`.`name` ASC";
+//Our select statement. This will retrieve the data that we want.
+$sqlgenre = "SELECT id, name FROM genres  ORDER BY `genres`.`name` ASC";
 
-    $sqlalbum = "SELECT id, title From albums WHERE tag='music' AND artist='$artistid'";
-    //ordeer
-
-
-    //Prepare the select statement.
-    $stmtgrenre = $conn->prepare($sqlgenre);
-    $stmtalbum = $conn->prepare($sqlalbum);
+$sqlalbum = "SELECT id, title From albums WHERE artist='$artistid'";
+//ordeer
 
 
-
-
-    //Execute the statement.
-    $stmtgrenre->execute();
-    $stmtalbum->execute();
-
-
-    //Retrieve the rows using fetchAll.
-    $genres = $stmtgrenre->fetchAll();
-    $albums = $stmtalbum->fetchAll();
-    echo " 
-                        <li><a class='nav-link' href='createcollection'>New Media Collection</a></li> 
-                        <li    class='active'><a class='nav-link' href='uploadmedia'>Add Songs</a></li>
-                        <li><a class='nav-link' href='managecontent'>Manage Content</a></li>
-                     
-                        ";
-} else if ($contenttag == "podcast") {
-
-    //Our select statement. This will retrieve the data that we want.
-    $sqlgenre = "SELECT id, name FROM genres where tag='other' ORDER BY `genres`.`name` ASC";
-
-    $sqlalbum = "SELECT id, title From albums WHERE tag='podcast' AND artist='$artistid'";
-    //ordeer
-
-
-    //Prepare the select statement.
-    $stmtgrenre = $conn->prepare($sqlgenre);
-    $stmtalbum = $conn->prepare($sqlalbum);
+//Prepare the select statement.
+$stmtgrenre = $conn->prepare($sqlgenre);
+$stmtalbum = $conn->prepare($sqlalbum);
 
 
 
 
-    //Execute the statement.
-    $stmtgrenre->execute();
-    $stmtalbum->execute();
+//Execute the statement.
+$stmtgrenre->execute();
+$stmtalbum->execute();
 
 
-    //Retrieve the rows using fetchAll.
-    $genres = $stmtgrenre->fetchAll();
-    $albums = $stmtalbum->fetchAll();
-    echo "
-                       <li><a class='nav-link' href='createcollection'>Create Podcast Collection</a></li> 
-                        <li  class='active'><a class='nav-link' href='uploadmedia'>Add Podcast</a></li>
-                        <li><a class='nav-link' href='managecontent'>Manage Content</a></li>
-                        
-                        ";
-} else if ($contenttag == "dj") {
+//Retrieve the rows using fetchAll.
+$genres = $stmtgrenre->fetchAll();
+$albums = $stmtalbum->fetchAll();
 
-    //Our select statement. This will retrieve the data that we want.
-    $sqlgenre = "SELECT id, name FROM genres where tag='other' ORDER BY `genres`.`name` ASC";
-
-    $sqlalbum = "SELECT id, title From albums WHERE tag='dj' AND artist='$artistid'";
-    //ordeer
-
-
-    //Prepare the select statement.
-    $stmtgrenre = $conn->prepare($sqlgenre);
-    $stmtalbum = $conn->prepare($sqlalbum);
-
-
-
-
-    //Execute the statement.
-    $stmtgrenre->execute();
-    $stmtalbum->execute();
-
-
-    //Retrieve the rows using fetchAll.
-    $genres = $stmtgrenre->fetchAll();
-    $albums = $stmtalbum->fetchAll();
-    echo "
-                        <li><a class='nav-link' href='createcollection'>Create Mixtape Collection</a></li> 
-                        <li class='active'><a class='nav-link' href='uploadmedia'>Add Mixtape</a></li>
-                        <li ><a class='nav-link' href='managecontent'>Manage Content</a></li>
-                        
-                        ";
-} else if ($contenttag == "poem") {
-
-    //Our select statement. This will retrieve the data that we want.
-    $sqlgenre = "SELECT id, name FROM genres where tag='other' ORDER BY `genres`.`name` ASC";
-
-    $sqlalbum = "SELECT id, title From albums WHERE tag='poem' AND artist='$artistid'";
-    //ordeer
-
-
-    //Prepare the select statement.
-    $stmtgrenre = $conn->prepare($sqlgenre);
-    $stmtalbum = $conn->prepare($sqlalbum);
-
-
-
-
-    //Execute the statement.
-    $stmtgrenre->execute();
-    $stmtalbum->execute();
-
-
-    //Retrieve the rows using fetchAll.
-    $genres = $stmtgrenre->fetchAll();
-    $albums = $stmtalbum->fetchAll();
-
-    echo " 
-                       <li><a class='nav-link' href='createcollection'>Create Poem Collection</a></li> 
-                        <li   class='active'><a class='nav-link' href='uploadmedia'>Add Poem</a></li>
-                        <li><a class='nav-link' href='managecontent'>Manage Content</a></li>
-                        
-                        ";
-} 
 ?>
 
 
 
 
 
-    <div class="create_media_container">
-        <div class="loginforminner  slide-in-right">
+<div class="create_media_container">
 
-            <!-- Display response messages -->
-            <?php if (!empty($resMessage)) { ?>
-                <div class=" alert <?php echo $resMessage['status'] ?>">
-                    <?php echo $resMessage['message'] ?>
-                </div>
-            <?php } ?>
+    <div class="mediaCreationheading" style="text-align: center;">
+        <h5>Upload Tracks / Episodes</h5>
+        <p style="font-size: 0.7em;color: #8b7097;">This is where you add Music Tracks,Podcast Episodes and More. </p>
+        <!-- <h5>EP (Extended Play) Creation Form</h5> -->
 
-            <div class="introtext">
-                <h2>Media Upload</h2>
-                <p>Upload Media to your account. songs uploaded will appear on the streaming site. Edits can be made
-                    later</p>
-
-            </div>
-            <form enctype="multipart/form-data" method="post" id="upload_form">
-
-                <div class="inputformelement">
-                    <input type="text" name="contenttype" class="inputarea disabledinput" readonly id="contenttype" aria-describedby="nameHelp" value="<?= $contenttag ?>">
-                </div>
-
-                <div class="fileuploadform" style="display: none;">
-                    <label for="songartist">Creator</label>
-                    <select name="artistselect" id="songartist" class="selectinput">
-                        <option selected value="<?= $artistid; ?>"><?= $artistname ?></option>
-                    </select>
-                </div>
-
-                <div class="fileuploadform">
-                    <label for="songAlbum">Media Collection <span class="required">*</span></label>
-                    <select name="albumselect" id="songAlbum" required class="selectinput">
-                        <option value="">Choose Album</option>
-                        <?php foreach ($albums as $album) : ?>
-                            <option value="<?= $album['id']; ?>"><?= $album['title']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-                <div class="fileuploadform">
-                    <label for="songGenre">Media Genre <span class="required">*</span></label>
-                    <select id="songGenre" required class="selectinput">
-                        <option value="">Choose Genre</option>
-                        <?php foreach ($genres as $genre) : ?>
-                            <option value="<?= $genre['id']; ?>"><?= $genre['name']; ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-
-
-                <input type="file" id="userfiles" class="upload-box" accept=".mp3, .wav" multiple type="file">
-
-                <input type="button" value="Upload Files" onclick="uploadFiles()">
-
-                <progress id="progressBar" value="0" max="100"></progress>
-
-                <h6 id="status" style="white-space: pre-line; line-height: 2em;" wrap="hard"></h6>
-                <p id="loaded_n_total"></p>
-
-            </form>
-        </div>
     </div>
+    <div class="loginforminner  slide-in-right">
+
+        <!-- Display response messages -->
+        <?php if (!empty($resMessage)) { ?>
+            <div class=" alert <?php echo $resMessage['status'] ?>">
+                <?php echo $resMessage['message'] ?>
+            </div>
+        <?php } ?>
+
+
+        <form enctype="multipart/form-data" method="post" id="upload_form">
+
+            <div class="inputformelement" style="display: none;">
+                <label class="submitedlable" for="songartist">Creator</label>
+                <select name="artistselect" id="songartist" class="mediauploadInput">
+                    <option selected value="<?= $artistid; ?>"><?= $artistname ?></option>
+                </select>
+            </div>
+
+            <div class="inputformelement">
+                <label class="submitedlable" for="songAlbum">Media Collection <span class="required">*</span></label>
+                <select name="albumselect" id="songAlbum" required class="mediauploadInput">
+                    <option value="">Choose Album</option>
+                    <?php foreach ($albums as $album) : ?>
+                        <option value="<?= $album['id']; ?>"><?= $album['title']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="inputformelement">
+                <label class="submitedlable" for="songGenre">Media Genre <span class="required">*</span></label>
+                <select id="songGenre" required class="mediauploadInput">
+                    <option value="">Choose Genre</option>
+                    <?php foreach ($genres as $genre) : ?>
+                        <option value="<?= $genre['id']; ?>"><?= $genre['name']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+
+            <div class="inputformelement">
+
+                <div class="custom-file">
+                    <label class="submitedlable" for="userfiles">Tracks<span class="required">*</span></label>
+
+                    <input type="file" id="userfiles" class="mediaFileinput" accept=".mp3, .wav" multiple type="file">
+
+                </div>
+            </div>
+
+
+            <input class="uploadtracksbtn" type="button" value="Upload Files" onclick="uploadFiles()">
+
+            <progress id="progressBar" value="0" max="100"></progress>
+
+            <h6 id="status" style="white-space: pre-line; line-height: 2em;" wrap="hard"></h6>
+            <p id="loaded_n_total"></p>
+
+        </form>
+    </div>
+</div>
