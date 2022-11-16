@@ -223,7 +223,7 @@ $albums = $stmtalbum->fetchAll();
             <div class="inputformelement">
 
                 <div class="custom-file">
-                    <label class="submitedlable" for="userfiles">Tracks<span class="required">*</span></label>
+                    <label class="submitedlable" for="userfiles">Tracks <span class="required">*</span></label>
 
                     <input type="file" id="userfiles" class="mediaFileinput" accept=".mp3, .wav" multiple type="file">
 
