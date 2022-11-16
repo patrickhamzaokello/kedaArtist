@@ -58,6 +58,10 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
                 <?php } ?>
 
                 <div class="inputformelement">
+                <input type="text" name="contenttype" class="inputarea disabledinput" readonly="" id="contenttype" aria-describedby="nameHelp" value="podcast">
+            </div>
+
+                <div class="inputformelement">
                     <label for="exampleInputEmail1" class="submitedlable">Title <span class="required">*</span></label>
                     <input type="text" name="AlbumTitle" required class="mediauploadInput" id="exampleInputEmail1" aria-describedby="nameHelp" placeholder="Enter Album Title">
                 </div>

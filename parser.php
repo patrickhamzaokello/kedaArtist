@@ -16,24 +16,34 @@ if (isset($_POST["username"])) {
 
     $i = 1;
 
+    $folder_container = "assets/music/";
+
 
     foreach ($_FILES as $file) {
 
         if ($tag == 'music') {
-            $target_file = "assets/music/" . $file['name'];
+            $folder_container = "assets/music/";
+            $target_file = $folder_container . $file['name'];
             $dbtarget_file = "https://artist.mwonyaa.com/assets/music/" . $file['name'];
         } elseif ($tag == 'podcast') {
-            $target_file = "assets/podcasts/" . $file['name'];
+            $folder_container = "assets/podcasts/";
+            $target_file = $folder_container . $file['name'];
             $dbtarget_file = "https://artist.mwonyaa.com/assets/podcasts/" . $file['name'];
         } elseif ($tag == 'dj') {
-            $target_file = "assets/djmixes/" . $file['name'];
+            $folder_container = "assets/djmixes/";
+            $target_file = $folder_container . $file['name'];
             $dbtarget_file = "https://artist.mwonyaa.com/assets/djmixes/" . $file['name'];
         } elseif ($tag == 'poem') {
-            $target_file = "assets/poems/" . $file['name'];
+            $folder_container = "assets/poems/";
+            $target_file = $folder_container . $file['name'];
             $dbtarget_file = "https://artist.mwonyaa.com/assets/poems/" . $file['name'];
         } else {
             echo "Media Tag is Not Provided";
             return;
+        }
+
+        if (!file_exists($folder_container)) {
+            mkdir($folder_container, 0777, true);
         }
 
 

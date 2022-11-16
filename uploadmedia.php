@@ -192,6 +192,10 @@ $albums = $stmtalbum->fetchAll();
 
         <form enctype="multipart/form-data" method="post" id="upload_form">
 
+            <div class="inputformelement">
+                <input type="text" name="contenttype" class="inputarea disabledinput" readonly="" id="contenttype" aria-describedby="nameHelp" value="podcast">
+            </div>
+
             <div class="inputformelement" style="display: none;">
                 <label class="submitedlable" for="songartist">Creator</label>
                 <select name="artistselect" id="songartist" class="mediauploadInput">

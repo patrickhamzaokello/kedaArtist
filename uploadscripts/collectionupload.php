@@ -38,7 +38,7 @@ if (isset($_POST["submit"])) {
     $firstthreeletters = substr(rand(), 0, 3);
     $id = "m_al" . uniqid() . $firstthreeletters;
      $dirpath = realpath(dirname(getcwd().DIRECTORY_SEPARATOR));
-
+     $target_dir = "assets/images/artwork/";
 
     if ($contenttype == 'music') {
         $target_dir = "assets/images/artwork/";
@@ -56,6 +56,11 @@ if (isset($_POST["submit"])) {
         echo "Media Tag is Not Provided";
         return;
     }
+
+    if (!file_exists($target_dir)) {
+        mkdir($target_dir, 0777, true);
+    }
+
 
     $temp = explode(".", $_FILES["fileUpload"]["name"]);
     // $newfilename = round(microtime(true)) . '.ll' . end($temp);
