@@ -43,7 +43,7 @@ $artist = $album->getArtist();
 
     <div class="overview__albums__head">
 
-        <span class="section-title">Album</span>
+        <span class="section-title">Edit</span>
 
 
 

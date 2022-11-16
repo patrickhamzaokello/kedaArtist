@@ -28,7 +28,7 @@ if(!isset($_SESSION["name"])){
     </script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
+    <!-- <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'> -->
     <link rel='stylesheet' href='https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -57,10 +57,10 @@ if(!isset($_SESSION["name"])){
     <!-- favicon end  -->
 
     <!-- bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
     <!-- end of bootstrap -->
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -83,83 +83,10 @@ if(!isset($_SESSION["name"])){
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse bg-dark">
+    <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Mwonyaa Artist</a>
-            </div>
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li><a href="index">Home</a></li>
-
-
-                    <?php
-                    if ($contenttag == "music") {
-                        echo " 
-                        <li><a class='nav-link' href='createcollection'>New Media Collection</a></li> 
-                        <li><a class='nav-link' href='uploadmedia'>Add Songs</a></li>
-                        <li  class='active'><a class='nav-link' href='managecontent'>Manage Content</a></li>
-                     
-                        ";
-                    } else if ($contenttag == "podcast") {
-                        echo "
-                       <li><a class='nav-link' href='createcollection'>Create Podcast Collection</a></li> 
-                        <li><a class='nav-link' href='uploadmedia'>Add Podcast</a></li>
-                        <li  class='active'><a class='nav-link' href='managecontent'>Manage Content</a></li>
-                        
-                        ";
-                    } else if ($contenttag == "dj") {
-                        echo "
-                        <li><a class='nav-link' href='createcollection'>Create Mixtape Collection</a></li> 
-                        <li><a class='nav-link' href='uploadmedia'>Add Mixtape</a></li>
-                        <li  class='active'><a class='nav-link' href='managecontent'>Manage Content</a></li>
-                        
-                        ";
-                    } else if ($contenttag == "poem") {
-
-                        echo " 
-                       <li><a class='nav-link' href='createcollection'>Create Poem Collection</a></li> 
-                        <li><a class='nav-link' href='uploadmedia'>Add Poem</a></li>
-                        <li  class='active'><a class='nav-link' href='managecontent'>Manage Content</a></li>
-                        
-                        ";
-                    } else {
-                        echo " ";
-                    }
-
-                    ?>
-
-
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-
-                    <?php
-                    if (isset($_SESSION["name"])) {
-
-                        echo "
-                        <li><a role='link' onclick='openPage(\"profileedit?id=" . $artistid . "\")'><span class='glyphicon glyphicon-user' ></span> $artistname</a></li>
-
-                        <li><a href='logout' tite='Logout'><span class='glyphicon glyphicon-log-out'></span> Logout</a>
-                        </li> ";
-                    } else {
-                        echo "
-                        <li><a href='contentcreator'><span class='glyphicon glyphicon-user'></span> Sign Up</a></li>
-                        <li><a href='login' tite='Login'><span class='glyphicon glyphicon-log-in'></span> Login</a>
-
-                        </li>
-
-                        ";
-                    }
-
-
-                    ?>
-
-                </ul>
+                <a class="navbar-brand" href="#">Mwonyaa Artist - Management Platform</a>
             </div>
         </div>
     </nav>
@@ -177,6 +104,8 @@ if(!isset($_SESSION["name"])){
                     <ul class="menu_nav-list">
                         <p>Manage</p>
                         <li class="menu_nav-item" onclick="openPage('home')"><button class="menu_nav-button"><i data-feather="home"></i>Home</button></li>
+                        <li class="menu_nav-item" onclick="openPage('library')"><button class="menu_nav-button"><i data-feather="layers"></i>Library</button></li>
+
                         <li class="menu_nav-item" onclick='openPage("profileedit?id=<?= $artistid ?>")'><button class="menu_nav-button"><i data-feather="lock"></i>Account</button></li>
 
                     </ul>
@@ -210,7 +139,7 @@ if(!isset($_SESSION["name"])){
 
                 <?php
 
-                $albumQuery = mysqli_query($con, "SELECT * FROM albums  WHERE  artist='$artistid' ORDER BY datecreated DESC");
+                $albumQuery = mysqli_query($con, "SELECT * FROM albums  WHERE  artist='$artistid' ORDER BY datecreated DESC Limit 8");
 
                 $albums_data = array();
 
@@ -225,8 +154,8 @@ if(!isset($_SESSION["name"])){
 
                 ?>
 
-                <div class="mcontainer ">
-                    <div class=" mycontainer">
+                <div class="create_container ">
+                    <div class="create_child_container">
                         <div class="activity">
                             <div class="icon">
                                 <svg width="50" height="50" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -291,7 +220,7 @@ if(!isset($_SESSION["name"])){
 
                 <?php if ($albums_data) : ?>
 
-                    <div class="recently_added" style="margin: 1em;">
+                    <div class="recently_added" style="margin: 1em 0;">
                         <p class="subtitle">Recently Added</p>
                         <a href="#" class="featured-title">Media Management</a>
                     </div>

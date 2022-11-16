@@ -34,7 +34,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 
 <?php
 
-$albumQuery = mysqli_query($con, "SELECT * FROM albums  WHERE  artist='$artistid' ORDER BY datecreated DESC");
+$albumQuery = mysqli_query($con, "SELECT * FROM albums  WHERE  artist='$artistid' ORDER BY datecreated DESC Limit 8");
 
 $albums_data = array();
 
@@ -49,8 +49,8 @@ if (mysqli_num_rows($albumQuery) != 0) {
 
 ?>
 
-<div class="mcontainer ">
-    <div class=" mycontainer">
+<div class="create_container ">
+    <div class="create_child_container">
         <div class="activity">
             <div class="icon">
                 <svg width="50" height="50" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -115,7 +115,7 @@ if (mysqli_num_rows($albumQuery) != 0) {
 
 <?php if ($albums_data) : ?>
 
-    <div class="recently_added" style="margin: 1em;">
+    <div class="recently_added" style="margin: 1em 0;">
         <p class="subtitle">Recently Added</p>
         <a href="#" class="featured-title">Media Management</a>
     </div>

@@ -88,14 +88,13 @@ include("config/global.php");
                     if (isset($_SESSION["name"])) {
 
                         echo "
+                        <li><a href='home'>Dashboard</a></li>
 
                         <li><a href='logout' tite='Logout'><span class='glyphicon glyphicon-log-out'></span> Logout</a>
                         </li> ";
                     } else {
                         echo "
                         <li><a class='heroactive' href='index'>Home</a></li>
-                        <li><a href='contentcreator' tite='Login'>Account</a>
-                        <li><a href='contact' tite='Login'>Contact</a>
                         <li><a href='contentcreator'> Sign Up</a></li>
                         <li><a href='login' tite='Login'> Login</a>
                         </li>
