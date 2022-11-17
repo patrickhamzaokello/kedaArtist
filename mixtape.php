@@ -183,7 +183,7 @@ $albums = $stmtalbum->fetchAll();
     <div class="manage_add_create">
 
     <div class="statistics">
-                    <div onclick="openPage('createcollection')" class="card" style="background: #560083; color: #fff;">
+                    <div onclick="openPage('uploadcollection?tag=dj')" class="card" style="background: #560083; color: #fff;">
                         <div class="illustration">
                             <img src="images/fluent_data-treemap-20-filled.svg" alt="">
                         </div>

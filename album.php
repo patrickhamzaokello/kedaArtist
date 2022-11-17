@@ -183,7 +183,7 @@ $albums = $stmtalbum->fetchAll();
     <div class="manage_add_create">
 
     <div class="statistics">
-                    <div onclick="openPage('createcollection')" class="card" style="background: #560083; color: #fff;">
+                    <div onclick="openPage('uploadcollection?tag=music')" class="card" style="background: #560083; color: #fff;">
                         <div class="illustration">
                             <img src="images/fluent_data-treemap-20-filled.svg" alt="">
                         </div>
@@ -192,7 +192,7 @@ $albums = $stmtalbum->fetchAll();
                         </div>
 
                     </div>
-                    <div onclick="openPage('uploadmedia')" class="card" style="background:#0d4e4e">
+                    <div onclick="openPage('uploadmedia?tag=music')" class="card" style="background:#0d4e4e">
                         <div class="illustration">
                             <img src="images/fontisto_shopping-basket.svg" alt="">
                         </div>
