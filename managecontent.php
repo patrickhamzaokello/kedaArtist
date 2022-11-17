@@ -321,7 +321,7 @@ if (!isset($_SESSION["name"])) {
                 
                 <div class='totalplays'>
                 <div class='stats'>
-                <h1>Total Plays </h1>
+                <h1>Streams</h1>
                 <p>" . $row['totalplays'] . "</p>
                 </div> 
                 </div>
@@ -330,7 +330,7 @@ if (!isset($_SESSION["name"])) {
                 <div class='totalplays'>
                 <div class='stats'>
 
-                <h1>Artist Albums </h1>
+                <h1>Media Items</h1>
                 <p>" . $noalbums['noalbums'] . "</p>
                 </div>
                 </div>
@@ -340,7 +340,7 @@ if (!isset($_SESSION["name"])) {
                  <div class='totalplays'>
                 <div class='stats'>
 
-                <h1>Artist Songs </h1>
+                <h1>All Tracks</h1>
                 <p>" . $nosongs['nosongs'] . "</p>
                 </div>
                 </div>
