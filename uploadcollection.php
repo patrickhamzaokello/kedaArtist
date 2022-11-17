@@ -44,12 +44,13 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 }
 
 
-function clean($string) {
+function clean($string)
+{
     $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
     $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
- 
+
     return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
- }
+}
 
 ?>
 
@@ -87,46 +88,50 @@ function clean($string) {
 
 
         // var songtitle = _("songtitle").value;
-        var songtag = _("contenttype").value;
-        var songartist = _("songartist").value;
-        var songAlbum = _("songAlbum").value;
-        var songGenre = _("songGenre").value;
+        var mediaTag = _("contenttype").value;
+        var mediaArtist = _("mediaArtist").value;
+        var AlbumTitle = _("AlbumTitle").value;
+        var mediaGenre = _("mediaGenre").value;
+        var mediaDescription = _("mediaDescription").value;
 
 
 
-        if (songAlbum == "") {
+        if (AlbumTitle == "") {
             allsafe = false;
-            _("songAlbum").style.border = "1px solid red";
+            _("AlbumTitle").style.border = "1px solid red";
             setTimeout(function() {
-                _("songAlbum").style.border = "1px solid white";
+                _("AlbumTitle").style.border = "1px solid white";
             }, 2000)
         }
-        if (songGenre == "") {
+        if (mediaDescription == "") {
+            mediaDescription = "Description not provided by Creator"
+        }
+        if (mediaGenre == "") {
             allsafe = false;
-            _("songGenre").style.border = "1px solid red";
+            _("mediaGenre").style.border = "1px solid red";
 
             setTimeout(function() {
-                _("songGenre").style.border = "1px solid white";
+                _("mediaGenre").style.border = "1px solid white";
             }, 2000)
 
         } else {
-            _("songAlbum").style.border = "1px solid white";
-            _("songGenre").style.border = "1px solid white";
+            _("AlbumTitle").style.border = "1px solid white";
+            _("mediaGenre").style.border = "1px solid white";
 
         }
 
         if (allsafe) {
-            _("songAlbum").style.border = "1px solid white";
-            _("songGenre").style.border = "1px solid white";
+            _("AlbumTitle").style.border = "1px solid white";
+            _("mediaGenre").style.border = "1px solid white";
             _("userfiles").style.border = "1px solid white";
 
 
 
-            // formdata.append("songtile", songtitle);
-            formdata.append("songtag", songtag);
-            formdata.append("songartist", songartist);
-            formdata.append("songAlbum", songAlbum);
-            formdata.append("songGenre", songGenre);
+            formdata.append("mediaTag", mediaTag);
+            formdata.append("mediaArtist", mediaArtist);
+            formdata.append("AlbumTitle", AlbumTitle);
+            formdata.append("mediaGenre", mediaGenre);
+            formdata.append("mediaDescription", mediaDescription);
 
             $('.uploadoverview').css('display', 'grid');
             $('#progressBar').css('display', 'block');
@@ -134,7 +139,7 @@ function clean($string) {
             var ajax = new XMLHttpRequest();
             ajax.upload.addEventListener("progress", progressHandler, false);
             ajax.addEventListener("load", completeHandler, false);
-            ajax.open("POST", "parser");
+            ajax.open("POST", "containerParser");
             ajax.send(formdata);
         }
 
@@ -194,8 +199,8 @@ $albums = $stmtalbum->fetchAll();
 <div class="create_media_container">
 
     <div class="mediaCreationheading" style="text-align: center;">
-        <h5>Upload Tracks / Episodes</h5>
-        <p style="font-size: 0.7em;color: #8b7097;">This is where you add Music Tracks,Podcast Episodes and More. </p>
+        <h5>Media Container Creation Form</h5>
+        <p style="font-size: 0.7em;color: #8b7097;">Create Container for a single, EP, Album, Mixtape or Podcast </p>
         <!-- <h5>EP (Extended Play) Creation Form</h5> -->
 
     </div>
@@ -216,25 +221,21 @@ $albums = $stmtalbum->fetchAll();
             </div>
 
             <div class="inputformelement" style="display: none;">
-                <label class="submitedlable" for="songartist">Creator</label>
-                <select name="artistselect" id="songartist" class="mediauploadInput">
+                <label class="submitedlable" for="mediaArtist">Creator</label>
+                <select name="artistselect" id="mediaArtist" class="mediauploadInput">
                     <option selected value="<?= $artistid; ?>"><?= $artistname ?></option>
                 </select>
             </div>
 
             <div class="inputformelement">
-                <label class="submitedlable" for="songAlbum">Media Container<span class="required">*</span></label>
-                <select name="albumselect" id="songAlbum" required class="mediauploadInput">
-                    <option value="">Choose Media Container</option>
-                    <?php foreach ($albums as $album) : ?>
-                        <option value="<?= $album['id']; ?>"><?= $album['title']; ?></option>
-                    <?php endforeach; ?>
-                </select>
+                <label class="submitedlable" for="AlbumTitle">Title <span class="required">*</span></label>
+                <input type="text" name="AlbumTitle" required class="mediauploadInput" id="AlbumTitle" aria-describedby="nameHelp" placeholder="Enter Album Title">
             </div>
 
+
             <div class="inputformelement">
-                <label class="submitedlable" for="songGenre">Media Genre <span class="required">*</span></label>
-                <select id="songGenre" required class="mediauploadInput">
+                <label class="submitedlable" for="mediaGenre">Media Genre <span class="required">*</span></label>
+                <select id="mediaGenre" required class="mediauploadInput">
                     <option value="">Choose Genre</option>
                     <?php foreach ($genres as $genre) : ?>
                         <option value="<?= $genre['id']; ?>"><?= $genre['name']; ?></option>
@@ -246,18 +247,22 @@ $albums = $stmtalbum->fetchAll();
             <div class="inputformelement">
 
                 <div class="custom-file">
-                    <label class="submitedlable" for="userfiles">Tracks <span class="required">*</span></label>
+                    <label class="submitedlable" for="userfiles">Media Cover <span class="required">*</span></label>
 
-                    <input type="file" id="userfiles" class="mediaFileinput" accept=".mp3, .wav" multiple type="file">
+                    <input type="file" id="userfiles" class="mediaFileinput" accept=".jpg, .png, .jpeg" type="file">
 
                 </div>
             </div>
 
+            <div class="inputformelement">
+                <label for="mediaDescription" class="submitedlable">Description <span class="required">*</span></label>
+                <textarea type="textarea" rows="5" required name="mediaDescription" class="mediauploadInput" id="mediaDescription" aria-describedby="descriptionHelp" placeholder="Album Description"></textarea>
+            </div>
 
-            <input class="uploadtracksbtn" type="button" value="Upload Files" onclick="uploadFiles()">
+            <input class="uploadtracksbtn" type="button" value="Create Container" onclick="uploadFiles()">
 
 
-
+            <p class="helptext" style="margin-top: 1em;">+ This form Creates an empty Media container. Remember to Add tracks to this Container later</p>
         </form>
     </div>
 </div>

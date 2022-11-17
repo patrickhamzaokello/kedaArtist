@@ -4,7 +4,7 @@ include("config/database.php");
 include("config/MP3File.php");
 
 
-if (isset($_POST["username"])) {
+if (isset($_POST["songartist"])) {
 
     // $albumtitle = $_POST["songtile"];
     $selectArtist = $_POST["songartist"];
