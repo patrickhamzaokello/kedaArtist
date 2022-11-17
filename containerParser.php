@@ -54,30 +54,16 @@ if (isset($_POST["mediaArtist"])) {
         }
 
 
-
-        $path_parts = pathinfo($dbtarget_file);
-
-        // echo $path_parts['dirname'], "\n";
-        // echo $path_parts['basename'], "\n";
-        // echo $path_parts['extension'], "\n";
-        // echo $path_parts['filename'], "\n";
-
-
-
-        $albumtitle = $path_parts['filename'];
-
-
-
         // Get file extension
         $imageExt = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         // Allowed file types
         $allowd_file_ext = array("png", "jpg", "JPEG", "jpeg");
 
-        if ($albumtitle == "" && $selectArtist == "Choose Creator" && $selectAlbum == "Choose Album" && $selectGenre == "Choose Genre" && $duration = "" && $tag = "") {
-            echo "input files cannot be empty";
+        if ($AlbumTitle == "" && $mediaArtist == "" && $mediaDescription == "" && $mediaGenre == "Choose Genre" && $tag = "") {
+            echo "Error Saving Info due to missing parts";
         } else if (!file_exists($file['tmp_name'])) {
 
-            echo "select song to upload";
+            echo "select Media to upload";
         }
         //  else if (!in_array($imageExt, $allowd_file_ext)) {
         //     echo "wrong file format. only mp3 files allowed";
@@ -101,13 +87,7 @@ if (isset($_POST["mediaArtist"])) {
     
                         $stmt = $conn->prepare($sql);
                         if ($stmt->execute()) {
-                            $resMessage = array(
-                                "status" => "alert-success",
-                                "message" => "Image uploaded successfully."
-                            );
-    
-                            echo "Done";
-    
+                        
                             echo $AlbumTitle . "<span class='checkeddone' style='color: green; font-weight:bold;'> Done</span>" . "\n";
                         } else {
                             echo "Media upload to Database Failed" . "\n";
@@ -125,13 +105,6 @@ if (isset($_POST["mediaArtist"])) {
 
                     $stmt = $conn->prepare($sql);
                     if ($stmt->execute()) {
-                        $resMessage = array(
-                            "status" => "alert-success",
-                            "message" => "Image uploaded successfully."
-                        );
-
-                        echo "Done";
-
                         echo $AlbumTitle . "<span class='checkeddone' style='color: green; font-weight:bold;'> Done</span>" . "\n";
                     } else {
                         echo "Media upload to Database Failed" . "\n";

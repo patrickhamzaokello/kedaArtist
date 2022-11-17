@@ -96,17 +96,17 @@ function clean($string)
 
 
 
-        if (AlbumTitle == "") {
+        if (AlbumTitle.length === 0) {
             allsafe = false;
             _("AlbumTitle").style.border = "1px solid red";
             setTimeout(function() {
                 _("AlbumTitle").style.border = "1px solid white";
             }, 2000)
         }
-        if (mediaDescription == "") {
+        if (mediaDescription.length === 0) {
             mediaDescription = "Description not provided by Creator"
         }
-        if (mediaGenre == "") {
+        if (mediaGenre.length === 0) {
             allsafe = false;
             _("mediaGenre").style.border = "1px solid red";
 
@@ -114,12 +114,7 @@ function clean($string)
                 _("mediaGenre").style.border = "1px solid white";
             }, 2000)
 
-        } else {
-            _("AlbumTitle").style.border = "1px solid white";
-            _("mediaGenre").style.border = "1px solid white";
-
-        }
-
+        } 
         if (allsafe) {
             _("AlbumTitle").style.border = "1px solid white";
             _("mediaGenre").style.border = "1px solid white";
