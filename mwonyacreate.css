@@ -2014,8 +2014,7 @@ section {
   outline: none;
 }
 
-
-.uploadtracksbtn:hover{
+.uploadtracksbtn:hover {
   background: #9f0159;
   border: #9f0159;
 }
@@ -2034,13 +2033,13 @@ progress[value] {
 
 progress::-webkit-progress-bar {
   /* style rules */
-  background-color: #D6F5E3;
-  border: 1px solid #0B9632;
+  background-color: #d6f5e3;
+  border: 1px solid #0b9632;
 }
 
 progress::-webkit-progress-value {
   /* style rules */
-  background-color: #0B9632;
+  background-color: #0b9632;
 }
 
 .progressLoadingtext {
@@ -2100,6 +2099,36 @@ progress::-webkit-progress-value {
   text-decoration: none;
   color: rgb(0 0 0);
   font-weight: bold;
+}
+
+.statistics {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  grid-gap: 1em;
+  margin-top: 1em;
+  margin-bottom: 4em;
+  place-content: center;
+}
+
+.create_media_container {
+  background: #390150;
+  padding: 1em;
+}
+
+.statistics .card {
+  padding: 2em 2.5em;
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .signuplink a:hover {
@@ -2704,7 +2733,7 @@ a {
 
 .artist__content .overview__artist {
   padding-right: 15px;
-  width: 70%;
+  width: 100%;
 }
 
 .artist__content .overview__related {
@@ -2730,17 +2759,18 @@ a {
 }
 
 .artist__content .overview__artist .latest-release__art img {
-  width: 75px;
-  height: 75px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
+
 
 .artist__content .overview__artist .latest-release__song {
   width: calc(100% - 75px);
   width: -webkit-calc(100% - 75px);
   width: -moz-calc(100% - 75px);
   padding: 10px 15px;
-  background: #4b2078;
+  background: #301146;
   color: #aaaaaa;
   display: flex;
   flex-flow: column wrap;

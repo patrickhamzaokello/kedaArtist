@@ -1,21 +1,5 @@
 <?php
 
-if (isset($_GET['tag'])) {
-    $mediaTag =  $_GET['tag'];
-    $mediaTag = clean($mediaTag);
-
-    $tag_array = ["music", "dj", "podcast", "poem"];
-    if (stripos(json_encode($tag_array), $mediaTag) !== false) {
-        // echo "found mystring";
-        $mediaTag =  $mediaTag;
-    } else {
-        $mediaTag =  "notfound";
-        header("Location:home");
-    }
-} else {
-    $mediaTag =  "music";
-}
-
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 
     include("config/global.php");
@@ -45,12 +29,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 }
 
 
-function clean($string) {
-    $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
-    $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
- 
-    return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
- }
+
 
 ?>
 
@@ -196,81 +175,35 @@ $albums = $stmtalbum->fetchAll();
 <div class="create_media_container">
 
     <div class="mediaCreationheading" style="text-align: center;">
-        <h5>Upload Tracks / Episodes</h5>
-        <p style="font-size: 0.7em;color: #8b7097;">This is where you add Music Tracks,Podcast Episodes and More. </p>
+        <h5>Singles</h5>
+        <p style="font-size: 0.7em;color: #8b7097;">Create & Manage Singles </p>
         <!-- <h5>EP (Extended Play) Creation Form</h5> -->
 
     </div>
-    <div class="loginforminner  slide-in-right">
+    <div class="manage_add_create">
 
-        <!-- Display response messages -->
-        <?php if (!empty($resMessage)) { ?>
-            <div class=" alert <?php echo $resMessage['status'] ?>">
-                <?php echo $resMessage['message'] ?>
-            </div>
-        <?php } ?>
+    <div class="statistics">
+                    <div onclick="openPage('createcollection')" class="card" style="background: #560083; color: #fff;">
+                        <div class="illustration">
+                            <img src="images/fluent_data-treemap-20-filled.svg" alt="">
+                        </div>
+                        <div class="stats">
+                                <p class="label" style="color: #fff">New Single</p>
+                        </div>
 
-
-        <form enctype="multipart/form-data" method="post" id="upload_form">
-
-            <div class="inputformelement">
-                <input type="text" name="contenttype" class="inputarea disabledinput" readonly="" id="contenttype" aria-describedby="nameHelp" value="<?= $mediaTag ?>">
-            </div>
-
-            <div class="inputformelement" style="display: none;">
-                <label class="submitedlable" for="songartist">Creator</label>
-                <select name="artistselect" id="songartist" class="mediauploadInput">
-                    <option selected value="<?= $artistid; ?>"><?= $artistname ?></option>
-                </select>
-            </div>
-
-            <div class="inputformelement">
-                <label class="submitedlable" for="songAlbum">Media Collection <span class="required">*</span></label>
-                <select name="albumselect" id="songAlbum" required class="mediauploadInput">
-                    <option value="">Choose Album</option>
-                    <?php foreach ($albums as $album) : ?>
-                        <option value="<?= $album['id']; ?>"><?= $album['title']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-
-            <div class="inputformelement">
-                <label class="submitedlable" for="songGenre">Media Genre <span class="required">*</span></label>
-                <select id="songGenre" required class="mediauploadInput">
-                    <option value="">Choose Genre</option>
-                    <?php foreach ($genres as $genre) : ?>
-                        <option value="<?= $genre['id']; ?>"><?= $genre['name']; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
+                    </div>
+                    <div onclick="openPage('uploadmedia?tag=music')" class="card" style="background:#0d4e4e">
+                        <div class="illustration">
+                            <img src="images/fontisto_shopping-basket.svg" alt="">
+                        </div>
+                        <div class="stats">
+                            <p class="label" style="color: #fff">Add Track to Single</p>
+                        </div>
+                    </div>
 
 
-            <div class="inputformelement">
-
-                <div class="custom-file">
-                    <label class="submitedlable" for="userfiles">Tracks <span class="required">*</span></label>
-
-                    <input type="file" id="userfiles" class="mediaFileinput" accept=".mp3, .wav" multiple type="file">
 
                 </div>
-            </div>
 
-
-            <input class="uploadtracksbtn" type="button" value="Upload Files" onclick="uploadFiles()">
-
-
-
-        </form>
     </div>
-</div>
-
-<div class="uploadoverview">
-    <div class="progressview">
-        <progress id="progressBar" value="0" max="100"></progress>
-
-        <h6 class="progressLoadingtext" id="status" wrap="hard"></h6>
-        <p id="loaded_n_total" class="progressupdateSize"></p>
-        <input class="uploadtracksbtn" type="button" value="Done" onclick="openPage('uploadmedia')">
-    </div>
-
 </div>
