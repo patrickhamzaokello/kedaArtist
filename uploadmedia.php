@@ -167,7 +167,7 @@ function clean($string) {
 //Our select statement. This will retrieve the data that we want.
 $sqlgenre = "SELECT id, name FROM genres  ORDER BY `genres`.`name` ASC";
 
-$sqlalbum = "SELECT id, title From albums WHERE artist='$artistid'";
+$sqlalbum = "SELECT id, title From albums WHERE artist='$artistid' AND tag='$mediaTag'";
 //ordeer
 
 
@@ -225,9 +225,9 @@ $albums = $stmtalbum->fetchAll();
             </div>
 
             <div class="inputformelement">
-                <label class="submitedlable" for="songAlbum">Media Collection <span class="required">*</span></label>
+                <label class="submitedlable" for="songAlbum">Media Container<span class="required">*</span></label>
                 <select name="albumselect" id="songAlbum" required class="mediauploadInput">
-                    <option value="">Choose Album</option>
+                    <option value="">Choose Media Container</option>
                     <?php foreach ($albums as $album) : ?>
                         <option value="<?= $album['id']; ?>"><?= $album['title']; ?></option>
                     <?php endforeach; ?>

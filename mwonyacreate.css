@@ -1908,15 +1908,17 @@ textarea {
 }
 
 .disabledinput {
-  background: #ffff002e;
+  background: #3b0152;
   border: none;
   outline: none;
   opacity: 1;
+  text-align: center;
 }
 
 .disablelabel {
   color: #b6b6b6;
   font-weight: 100;
+  text-align: center;
 }
 
 .checkeddone {
@@ -1981,7 +1983,7 @@ section {
 .mediauploadInput {
   /* height: 50px; */
   width: 100%;
-  background: #1f102d;
+  background: #460560;
   border: none;
   font-size: 15px;
   font-weight: 300;
@@ -1993,8 +1995,8 @@ section {
 .mediaFileinput {
   margin-bottom: 0.7em;
   font-size: 14px;
-  border: 1px solid #1f102d;
-  background: #1f102d;
+  border: 1px solid #460560;
+  background: #460560;
   padding: 11px 20px;
   outline: none;
   overflow: hidden;
