@@ -211,7 +211,7 @@ $albums = $stmtalbum->fetchAll();
 
         <form enctype="multipart/form-data" method="post" id="upload_form">
 
-            <div class="inputformelement">
+            <div class="inputformelement" style="display: none;">
                 <input type="text" name="contenttype" class="inputarea disabledinput" readonly="" id="contenttype" aria-describedby="nameHelp" value="<?= $mediaTag ?>">
             </div>
 
@@ -268,7 +268,7 @@ $albums = $stmtalbum->fetchAll();
 
         <h6 class="progressLoadingtext" id="status" wrap="hard"></h6>
         <p id="loaded_n_total" class="progressupdateSize"></p>
-        <input class="uploadtracksbtn" type="button" value="Done" onclick="openPage('uploadmedia')">
+        <input class="uploadtracksbtn" type="button" value="Done" onclick="openPage('home')">
     </div>
 
 </div>
