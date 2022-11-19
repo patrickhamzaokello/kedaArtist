@@ -89,5 +89,5 @@ if (mysqli_num_rows($albumQuery) != 0) {
 
 
 <?php else :  ?>
-    Working on Getting Featured Music Artists Curated for You
+    Add Media Collectio and Items
 <?php endif ?>
