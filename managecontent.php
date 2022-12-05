@@ -125,7 +125,7 @@ if (!isset($_SESSION["name"])) {
                         <li class="menu_nav-item" onclick="openPage('mixtape')"><button class="menu_nav-button"><i data-feather="speaker"></i>Mix Tape</button></li>
                     </ul>
                     <ul class="menu_nav-list">
-                        <a href="Logout">
+                        <a href="logout">
                             <li class="menu_nav-item"><button class="menu_nav-button menu_nav-button--delete"><i data-feather="log-out"></i>Logout</button></li>
                         </a>
                     </ul>
