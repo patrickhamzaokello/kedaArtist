@@ -1,17 +1,8 @@
 RewriteEngine On
 
-Header set Access-Control-Allow-Origin "https://www.mwonyaa.com"
-Header set Access-Control-Allow-Origin "https://www.mwonya.com"
-Header set Access-Control-Allow-Origin "https://shop.mwonyaa.com"
+Header add Access-Control-Allow-Origin "https://www.mwonyaa.com, https://www.mwonya.com, https://shop.mwonyaa.com"
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
-
-
-php_value upload_max_filesize 256M
-php_value post_max_size 256M
-php_value memory_limit 512M
-php_value max_input_time 180
-php_value max_execution_time 180
 
 Options -Indexes
