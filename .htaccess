@@ -1,6 +1,6 @@
 RewriteEngine On
 
-Header set Access-Control-Allow-Origin "https://www.mwonyaa.com https://www.mwonya.com https://shop.mwonyaa.com"
+Header set Access-Control-Allow-Origin "https://mwonya.com/ https://www.mwonyaa.com https://www.mwonya.com https://shop.mwonyaa.com"
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
