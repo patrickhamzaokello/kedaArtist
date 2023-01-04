@@ -41,7 +41,7 @@ if (isset($_POST["username"]) && isset($_POST["artistidgot"]) && isset($_FILES["
             // file was successfully moved to target folder
             // update database record
             $stmt = mysqli_prepare($con, "UPDATE artists SET profilephoto=? WHERE id=?");
-            mysqli_stmt_bind_param($stmt, "si", $dbtarget_file, $selectartist);
+            mysqli_stmt_bind_param($stmt, "ss", $dbtarget_file, $selectartist);
             mysqli_stmt_execute($stmt);
             if (mysqli_stmt_affected_rows($stmt) > 0) {
                 // database query was successful
