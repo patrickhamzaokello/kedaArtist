@@ -210,13 +210,10 @@ function changeprofileimage(artistidgot) {
 
   if (prompt == true) {
     var formdata = new FormData();
-    var userfiles = document.getElementsByName("filegroup");
-    for (var i = 0; i < userfiles.length; i++) {
-      var file = userfiles[i].files[0];
-      if (file) {
-        formdata.append("file_" + i, file);
-        // file.name (name | size | type)
-      }
+    var userfiles = document.getElementsByName("artist_image");
+    var file = userfiles[0].files[0];
+    if (file) {
+      formdata.append("file", file);
     }
 
     formdata.append("artistidgot", artistidgot);
@@ -237,15 +234,11 @@ function changecoverimage(artistidgot) {
 
   if (prompt == true) {
     var formdata = new FormData();
-    var userfiles = document.getElementsByName("filegroup");
-    for (var i = 0; i < userfiles.length; i++) {
-      var file = userfiles[i].files[0];
-      if (file) {
-        formdata.append("file_" + i, file);
-        // file.name (name | size | type)
-      }
+    var userfiles = document.getElementsByName("artist_cover_image");
+    var file = userfiles[0].files[0];
+    if (file) {
+      formdata.append("file", file);
     }
-
     formdata.append("artistidgot", artistidgot);
 
     formdata.append("username", userLoggedIn);

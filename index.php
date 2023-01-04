@@ -45,6 +45,22 @@ include("config/global.php");
     <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
 
 
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Mwonya Artist Platform">
+    <meta property="og:description" content="Mwonya Platform provides Music, Live Radio, Podcasts,Dj Mixes and Poems All available on the go and at your demand.">
+    <meta property="og:url" content="https://artist.mwonya.com/">
+    <meta property="og:site_name" content="Mwonya Music">
+    <meta property="article:published_time" content="02 Dec 2022">
+    <meta property="article:modified_time" content="02 Dec 2022">
+    <meta property="og:update_time" content="Mwonya Music">
+    <meta property="og:image" content="https://mwonya.com/staticFiles/meta_og_image.png">
+    <meta property="og:image:secure_url" content="https://mwonya.com/staticFiles/meta_og_image.png">
+    <meta property="og:image:width" content="1080">
+    <meta property="og:image:height" content="1080">
+    <meta property="og:image:alt" content="Mwonya logo">
+
+
     <!-- favicon end  -->
 
     <!-- bootstrap -->

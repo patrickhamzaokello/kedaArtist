@@ -85,7 +85,7 @@ $artist = new Artist($con, $artistId);
                         <a class="close" href="#">&times;</a>
                         <div class="areacont">
                             <form enctype="multipart/form-data" method="post" id="upload_form">
-                                <input name="filegroup" accept=".jpg, .png, .jpeg" class="coverimageinput" type="file">
+                                <input name="artist_image" accept=".jpg, .png, .jpeg" class="coverimageinput" type="file">
                                 <input type="button" class="uploadimagebtn" value="Upload Files"
                                     onclick="changeprofileimage('<?php echo $artistId; ?>')">
 
@@ -109,7 +109,7 @@ $artist = new Artist($con, $artistId);
                         <a class="close" href="#">&times;</a>
                         <div class="areacont">
                             <form enctype="multipart/form-data" method="post" id="upload_form">
-                                <input name="filegroup" accept=".jpg, .png, .jpeg" class="coverimageinput" type="file">
+                                <input name="artist_cover_image" accept=".jpg, .png, .jpeg" class="coverimageinput" type="file">
                                 <input type="button" class="uploadimagebtn" value="Upload Files"
                                     onclick="changecoverimage('<?php echo $artistId; ?>')">
 
