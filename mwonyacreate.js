@@ -225,7 +225,7 @@ function changeprofileimage(artistidgot) {
     ajax.addEventListener("load", completeHandler, false);
     ajax.open("POST", "logic/artistprofileedit.php");
     ajax.send(formdata);
-    location.reload();
+    // location.reload();
   }
 }
 
@@ -248,6 +248,6 @@ function changecoverimage(artistidgot) {
     ajax.addEventListener("load", completeHandler, false);
     ajax.open("POST", "logic/artistcoveredit.php");
     ajax.send(formdata);
-    location.reload();
+    // location.reload();
   }
 }
