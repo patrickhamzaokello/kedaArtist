@@ -93,9 +93,18 @@ function addTrackContainer($album_artWorkFile, $albumtage, $conn, $id, $albumTit
         } else {
             if (move_uploaded_file($album_artWorkFile['tmp_name'], $target_file)) {
 
-                $sql = "INSERT INTO albums (id,title,artist,genre,artworkPath,tag,releaseDate,description,AES_code) VALUES ('$id','$albumTitle','$albumArtist','$albumGenre','$dbtarget_file','$albumtage','$release','$albumDescription','single')";
+                $sql = "INSERT INTO albums (id, title, artist, genre, artworkPath, tag, releaseDate, description, AES_code) VALUES (:id, :title, :artist, :genre, :artworkPath, :tag, :releaseDate, :description, 'single')";
 
                 $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':id', $id);
+                $stmt->bindParam(':title', $albumTitle);
+                $stmt->bindParam(':artist', $albumArtist);
+                $stmt->bindParam(':genre', $albumGenre);
+                $stmt->bindParam(':artworkPath', $dbtarget_file);
+                $stmt->bindParam(':tag', $albumtage);
+                $stmt->bindParam(':releaseDate', $release);
+                $stmt->bindParam(':description', $albumDescription);
+
                 if ($stmt->execute()) {
                     echo $albumTitle . "<span class='checkeddone' style='color: green; font-weight:bold;'> Done</span>" . "\n";
                 } else {
