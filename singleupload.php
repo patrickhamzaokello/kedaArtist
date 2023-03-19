@@ -20,40 +20,10 @@ $artWorkFile = $_FILES['artWorkPath'];
 $trackFile = $_FILES['trackPath'];
 $trackTitle = sanitizeFormInput($_POST['trackTitle']);
 $tag = sanitizeFormInput($_POST["contenttype"]);
-$plays = 0;
 
-$i = 1;
-
-$folder_container = "assets/music/";
 
 addTrackContainer($artWorkFile, $tag, $conn, $id, $albumTitle, $artistId, $genreId, $releaseDate, $description);
 
-
-//// set folders for upload
-//if ($tag == 'music') {
-//    $folder_container = "assets/music/";
-//    $target_file = $folder_container . $trackFile['name'];
-//    $dbtarget_file = "https://artist.mwonya.com/assets/music/" . $trackFile['name'];
-//} elseif ($tag == 'podcast') {
-//    $folder_container = "assets/podcasts/";
-//    $target_file = $folder_container . $trackFile['name'];
-//    $dbtarget_file = "https://artist.mwonya.com/assets/podcasts/" . $trackFile['name'];
-//} elseif ($tag == 'dj') {
-//    $folder_container = "assets/djmixes/";
-//    $target_file = $folder_container . $trackFile['name'];
-//    $dbtarget_file = "https://artist.mwonya.com/assets/djmixes/" . $trackFile['name'];
-//} elseif ($tag == 'poem') {
-//    $folder_container = "assets/poems/";
-//    $target_file = $folder_container . $trackFile['name'];
-//    $dbtarget_file = "https://artist.mwonya.com/assets/poems/" . $trackFile['name'];
-//} else {
-//    echo "Media Tag is Not Provided";
-//    return;
-//}
-//
-//if (!file_exists($folder_container)) {
-//    mkdir($folder_container, 0777, true);
-//}
 
 
 function addTrackContainer($album_artWorkFile, $albumtage, $conn, $id, $albumTitle, $albumArtist, $albumGenre, $release, $albumDescription)
