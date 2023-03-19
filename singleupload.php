@@ -76,7 +76,7 @@ function addTrackContainer($album_artWorkFile, $albumtage, $conn, $id, $albumTit
     $checkduplicate = $conn->prepare("SELECT * FROM albums WHERE id=:id");
     $checkduplicate->execute(array(':id' => $id));
     if ($checkduplicate->rowCount() >= 1) {
-        echo $albumTitle . "<span class='fileexistdanger' style='color: red;'>Media file already Exists in Database</span>" . "\n";
+        echo "<span class='fileexistdanger' style='color: red;'>".$albumTitle . "Media file already Exists in Database</span>" . "\n";
         return;
     }
 
@@ -97,7 +97,7 @@ function addTrackContainer($album_artWorkFile, $albumtage, $conn, $id, $albumTit
         $stmt->bindParam(':description', $albumDescription);
 
         if ($stmt->execute()) {
-            echo $albumTitle . "<span class='checkeddone' style='color: green; font-weight:bold;'> Done</span>" . "\n";
+            echo"<span class='checkeddone' style='color: green; font-weight:bold;'>". $albumTitle ."  Uploaded</span>" . "\n";
         } else {
             echo "<span class='checkeddone' style='color: green; font-weight:bold;'>Media upload to Database Failed</span>" . "\n";
         }
@@ -161,7 +161,7 @@ function addTrack($conn, $trackFile, $track_title, $track_tag, $album_id, $track
     $checkduplicate = $conn->prepare("SELECT * FROM songs WHERE title=:title AND artist=:artist AND album=:album");
     $checkduplicate->execute(array(':title' => $track_title,':artist'=> $track_Artist,':album'=> $album_id));
     if ($checkduplicate->rowCount() >= 1) {
-        echo $track_title . "<span class='fileexistdanger' style='color: red;'>track already Exists in Database</span>" . "\n";
+        echo  "<span class='fileexistdanger' style='color: red;'>".$track_title ." track already Exists in Database</span>" . "\n";
         return;
     }
 
@@ -173,8 +173,6 @@ function addTrack($conn, $trackFile, $track_title, $track_tag, $album_id, $track
         $stmt = $conn->prepare($sql);
         $stmt->execute(array(':album' => $album_id));
         $albumOrder = $stmt->fetch(PDO::FETCH_ASSOC)['albumOrder'];
-
-        echo $albumOrder;
 
         // Insert track information into database
         $sql = "INSERT INTO songs (title,artist,album,genre,path,albumOrder,releaseDate,tag) VALUES (:title, :artist, :album, :genre, :trackFilePath, :albumOrder, :releaseDate, :tag)";
@@ -189,7 +187,7 @@ function addTrack($conn, $trackFile, $track_title, $track_tag, $album_id, $track
         $stmt->bindParam(':tag', $track_tag);
 
         if ($stmt->execute()) {
-            echo $track_title . "<span class='checkeddone' style='color: green; font-weight:bold;'> Track Uploaded Successfully</span>" . "\n";
+            echo "<span class='checkeddone' style='color: green; font-weight:bold;'>".$track_title ."   Uploaded Successfully</span>" . "\n";
         } else {
             echo "<span class='checkeddone' style='color: green; font-weight:bold;'> Audio upload to Database Failed</span>" . "\n";
         }
