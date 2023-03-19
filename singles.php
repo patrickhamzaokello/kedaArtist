@@ -158,8 +158,7 @@ $albums = $stmtalbum->fetchAll();
 
     <div class="mediaCreationheading" style="text-align: center;">
         <h5>Media Container Creation Form</h5>
-        <p style="font-size: 0.7em;color: #8b7097;">Create Container for a single, EP, Album, Mixtape or Podcast </p>
-        <!-- <h5>EP (Extended Play) Creation Form</h5> -->
+        <p style="font-size: 0.7em;color: #8b7097;">Add your new single to Mwonya</p>
 
     </div>
     <div class="loginforminner  slide-in-right">
@@ -191,8 +190,8 @@ $albums = $stmtalbum->fetchAll();
             </div>
 
             <div class="inputformelement">
-                <label class="submitedlable" for="AlbumTitle">Album / Ep Name <span class="required">*</span></label>
-                <input type="text" name="AlbumTitle" required class="mediauploadInput" id="AlbumTitle" aria-describedby="nameHelp" placeholder="Enter Album / EP Name">
+                <label class="submitedlable" for="AlbumTitle">Track Album Name <span class="required">*</span></label>
+                <input type="text" name="AlbumTitle" required class="mediauploadInput" id="AlbumTitle" aria-describedby="nameHelp" placeholder="Track Album Name">
             </div>
 
 

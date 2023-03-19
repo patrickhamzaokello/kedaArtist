@@ -97,7 +97,7 @@ function addTrackContainer($album_artWorkFile, $albumtage, $conn, $id, $albumTit
         $stmt->bindParam(':description', $albumDescription);
 
         if ($stmt->execute()) {
-            echo"<span class='checkeddone' style='color: green; font-weight:bold;'>". $albumTitle ."  Uploaded</span>" . "\n";
+            echo"<span class='checkeddone' style='color: green; font-weight:bold;'>". $albumTitle ."  Track Artwork Uploaded Successfully, </span>" . "\n";
         } else {
             echo "<span class='checkeddone' style='color: green; font-weight:bold;'>Media upload to Database Failed</span>" . "\n";
         }
