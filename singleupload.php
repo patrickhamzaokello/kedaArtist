@@ -126,7 +126,39 @@ function addTrackContainer($conn, $album_artWorkFile, $tag, $album_id, $albumTit
         $stmt->bindParam(':description', $albumDescription);
 
         if ($stmt->execute()) {
+
+            // Move track audio file to target folder
+            if (move_uploaded_file($trackFile['tmp_name'], $target_file_track)) {
+
+                $sql = "SELECT COALESCE(MAX(albumOrder) + 1, 1) AS albumOrder FROM songs WHERE album = :album";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute(array(':album' => $album_id));
+                $albumOrder = $stmt->fetch(PDO::FETCH_ASSOC)['albumOrder'];
+
+                // Insert track information into database
+                $sql = "INSERT INTO songs (title,artist,album,genre,path,albumOrder,releaseDate,tag) VALUES (:title, :artist, :album, :genre, :trackFilePath, :albumOrder, :releaseDate, :tag)";
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':title', $track_title);
+                $stmt->bindParam(':artist', $albumArtist);
+                $stmt->bindParam(':album', $album_id);
+                $stmt->bindParam(':genre', $albumGenre);
+                $stmt->bindParam(':trackFilePath', $dbtarget_file_track);
+                $stmt->bindParam(':albumOrder', $albumOrder);
+                $stmt->bindParam(':releaseDate', $release);
+                $stmt->bindParam(':tag', $tag);
+
+                if ($stmt->execute()) {
+                    echo "<span class='checkeddone' style='color: green; font-weight:bold;'>".$track_title ."   Uploaded Successfully</span>" . "\n";
+                    return;
+                } else {
+                    echo "<span class='checkeddone' style='color: green; font-weight:bold;'> Audio upload to Database Failed</span>" . "\n";
+                    return;
+                }
+            } else {
+                echo "<span class='checkeddone' style='color: green; font-weight:bold;'> Audio Upload Failed. Try again</span>" . "\n";
+            }
             echo"<span class='checkeddone' style='color: green; font-weight:bold;'>". $albumTitle ."  Track Artwork Uploaded Successfully, </span>" . "\n";
+
         } else {
             echo "<span class='checkeddone' style='color: green; font-weight:bold;'>Media upload to Database Failed</span>" . "\n";
         }
@@ -134,34 +166,6 @@ function addTrackContainer($conn, $album_artWorkFile, $tag, $album_id, $albumTit
         echo "<span class='checkeddone' style='color: green; font-weight:bold;'>Media Upload Failed. Try again</span>" . "\n";
     }
 
-    // Move track audio file to target folder
-    if (move_uploaded_file($trackFile['tmp_name'], $target_file_track)) {
-
-        $sql = "SELECT COALESCE(MAX(albumOrder) + 1, 1) AS albumOrder FROM songs WHERE album = :album";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute(array(':album' => $album_id));
-        $albumOrder = $stmt->fetch(PDO::FETCH_ASSOC)['albumOrder'];
-
-        // Insert track information into database
-        $sql = "INSERT INTO songs (title,artist,album,genre,path,albumOrder,releaseDate,tag) VALUES (:title, :artist, :album, :genre, :trackFilePath, :albumOrder, :releaseDate, :tag)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':title', $track_title);
-        $stmt->bindParam(':artist', $albumArtist);
-        $stmt->bindParam(':album', $album_id);
-        $stmt->bindParam(':genre', $albumGenre);
-        $stmt->bindParam(':trackFilePath', $dbtarget_file_track);
-        $stmt->bindParam(':albumOrder', $albumOrder);
-        $stmt->bindParam(':releaseDate', $release);
-        $stmt->bindParam(':tag', $tag);
-
-        if ($stmt->execute()) {
-            echo "<span class='checkeddone' style='color: green; font-weight:bold;'>".$track_title ."   Uploaded Successfully</span>" . "\n";
-        } else {
-            echo "<span class='checkeddone' style='color: green; font-weight:bold;'> Audio upload to Database Failed</span>" . "\n";
-        }
-    } else {
-        echo "<span class='checkeddone' style='color: green; font-weight:bold;'> Audio Upload Failed. Try again</span>" . "\n";
-    }
 
 }
 
