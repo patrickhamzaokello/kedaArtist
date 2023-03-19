@@ -13,7 +13,6 @@ if (isset($_POST["songartist"])) {
     $tag = $_POST["songtag"];
     $plays = 0;
 
-
     $i = 1;
 
     $folder_container = "assets/music/";
@@ -24,19 +23,19 @@ if (isset($_POST["songartist"])) {
         if ($tag == 'music') {
             $folder_container = "assets/music/";
             $target_file = $folder_container . $file['name'];
-            $dbtarget_file = "https://artist.mwonyaa.com/assets/music/" . $file['name'];
+            $dbtarget_file = "https://artist.mwonya.com/assets/music/" . $file['name'];
         } elseif ($tag == 'podcast') {
             $folder_container = "assets/podcasts/";
             $target_file = $folder_container . $file['name'];
-            $dbtarget_file = "https://artist.mwonyaa.com/assets/podcasts/" . $file['name'];
+            $dbtarget_file = "https://artist.mwonya.com/assets/podcasts/" . $file['name'];
         } elseif ($tag == 'dj') {
             $folder_container = "assets/djmixes/";
             $target_file = $folder_container . $file['name'];
-            $dbtarget_file = "https://artist.mwonyaa.com/assets/djmixes/" . $file['name'];
+            $dbtarget_file = "https://artist.mwonya.com/assets/djmixes/" . $file['name'];
         } elseif ($tag == 'poem') {
             $folder_container = "assets/poems/";
             $target_file = $folder_container . $file['name'];
-            $dbtarget_file = "https://artist.mwonyaa.com/assets/poems/" . $file['name'];
+            $dbtarget_file = "https://artist.mwonya.com/assets/poems/" . $file['name'];
         } else {
             echo "Media Tag is Not Provided";
             return;
@@ -50,10 +49,7 @@ if (isset($_POST["songartist"])) {
 
         $path_parts = pathinfo($dbtarget_file);
 
-        // echo $path_parts['dirname'], "\n";
-        // echo $path_parts['basename'], "\n";
-        // echo $path_parts['extension'], "\n";
-        // echo $path_parts['filename'], "\n";
+
 
         //get albumsongorder
         $orderIdQuery = "SELECT IFNULL(max(albumOrder)+1, 1) AS albumOrder FROM songs WHERE album ='$selectAlbum'";

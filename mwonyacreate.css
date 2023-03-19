@@ -1992,6 +1992,10 @@ section {
   color: #dddddd;
 }
 
+.mediauploadInput:focus{
+  outline: 1px solid white;
+}
+
 .mediaFileinput {
   margin-bottom: 0.7em;
   font-size: 14px;

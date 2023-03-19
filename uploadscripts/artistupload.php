@@ -8,7 +8,7 @@ include("config/database.php");
 
 if (isset($_POST["submit"])) {
     $target_dir = "assets/images/artistprofiles/";
-    $dbtarget_dir = "https://artist.mwonyaa.com/assets/images/artistprofiles/";
+    $dbtarget_dir = "https://artist.mwonya.com/assets/images/artistprofiles/";
 
     if (!file_exists($target_dir)) {
         mkdir($target_dir, 0777, true);

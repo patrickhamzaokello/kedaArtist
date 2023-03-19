@@ -31,19 +31,19 @@ if (isset($_POST["mediaArtist"])) {
         if ($tag == 'music') {
             $folder_container = "assets/images/artwork/";
             $target_file = $folder_container . $file['name'];
-            $dbtarget_file = "https://artist.mwonyaa.com/assets/images/artwork/" . $file['name'];
+            $dbtarget_file = "https://artist.mwonya.com/assets/images/artwork/" . $file['name'];
         } elseif ($tag == 'podcast') {
             $folder_container = "assets/images/podcastalbumartwork/";
             $target_file = $folder_container . $file['name'];
-            $dbtarget_file = "https://artist.mwonyaa.com/assets/images/podcastalbumartwork/" . $file['name'];
+            $dbtarget_file = "https://artist.mwonya.com/assets/images/podcastalbumartwork/" . $file['name'];
         } elseif ($tag == 'dj') {
             $folder_container = "assets/images/podcastalbumartwork/";
             $target_file = $folder_container . $file['name'];
-            $dbtarget_file = "https://artist.mwonyaa.com/assets/images/podcastalbumartwork/" . $file['name'];
+            $dbtarget_file = "https://artist.mwonya.com/assets/images/podcastalbumartwork/" . $file['name'];
         } elseif ($tag == 'poem') {
             $folder_container = "assets/images/poemsartwork/";
             $target_file = $folder_container . $file['name'];
-            $dbtarget_file = "https://artist.mwonyaa.com/assets/images/poemsartwork/" . $file['name'];
+            $dbtarget_file = "https://artist.mwonya.com/assets/images/poemsartwork/" . $file['name'];
         } else {
             echo "Media Tag is Not Provided";
             return;

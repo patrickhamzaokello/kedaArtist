@@ -1,5 +1,21 @@
 <?php
 
+if (isset($_GET['tag'])) {
+    $mediaTag =  $_GET['tag'];
+    $mediaTag = clean($mediaTag);
+
+    $tag_array = ["music", "dj", "podcast", "poem"];
+    if (stripos(json_encode($tag_array), $mediaTag) !== false) {
+        // echo "found mystring";
+        $mediaTag =  $mediaTag;
+    } else {
+        $mediaTag =  "notfound";
+        header("Location:home");
+    }
+} else {
+    $mediaTag =  "music";
+}
+
 if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 
     include("config/global.php");
@@ -11,7 +27,6 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
     include("includes/classes/Song.php");
     include("includes/classes/Playlist.php");
     include("includes/classes/LikedSong.php");
-    include("uploadscripts/collectionupload.php");
 
     if (isset($_GET['userLoggedIn'])) {
         $userLoggedIn = new User($con, $_GET['userLoggedIn']);
@@ -29,7 +44,13 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 }
 
 
+function clean($string)
+{
+    $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+    $string = preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
 
+    return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
+}
 
 ?>
 
@@ -39,89 +60,50 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
         return document.getElementById(id);
     }
 
-    function uploadFiles() {
 
 
+    function saveSinglesToDB() {
+        // Get the input field values
+        var contentType = _("contenttype").value;
+        var artistSelect = _("mediaArtist").value;
+        var trackTitle = _("trackTitle").value;
+        var albumTitle = _("AlbumTitle").value;
+        var mediaGenre = _("mediaGenre").value;
+        var releaseDate = _("releaseDate").value;
+        var artWorkPath = _("artWorkPath").files[0];
+        var trackPath = _("trackPath").files[0];
+        var mediaDescription = _("mediaDescription").value;
+
+        const firstThreeLetters = Math.floor(Math.random() * 1000).toString().substr(0, 3);
+        const mediaAlbumID = "m_al" + Date.now().toString(36) + firstThreeLetters;
 
 
-        var allsafe = true;
+        console.log(contentType + "- "+mediaAlbumID + "- "+ artistSelect + "- "+ trackTitle + "- "+ albumTitle + "- "+ mediaGenre + "- "+ releaseDate + "- "+ artWorkPath + "- "+ trackPath + "- "+ mediaDescription)
 
-        var formdata = new FormData();
-        var ufiles = _("userfiles").files;
+        // Create a FormData object and append the input field values
+        var formData = new FormData();
+        formData.append("contenttype", contentType);
+        formData.append("artistselect", artistSelect);
+        formData.append("trackTitle", trackTitle);
+        formData.append("albumTitle", albumTitle);
+        formData.append("mediaGenre", mediaGenre);
+        formData.append("album_id", mediaAlbumID);
+        formData.append("releaseDate", releaseDate);
+        formData.append("artWorkPath", artWorkPath);
+        formData.append("trackPath", trackPath);
+        formData.append("mediaDescription", mediaDescription);
 
-        if (ufiles.length == 0) {
-            allsafe = false;
+        // Create an XMLHttpRequest object and send a POST request to a PHP script
+        $('.uploadoverview').css('display', 'grid');
+        $('#progressBar').css('display', 'block');
 
-            _("userfiles").style.border = "1px solid red"
-            setTimeout(function() {
-                _("userfiles").style.border = "1px solid white";
-            }, 2000)
-        } else {
-
-            for (var i = 0; i < ufiles.length; i++) {
-                formdata.append("file_" + i, ufiles[i]);
-                // ufiles.name (name /size / type)
-            }
-
-        }
-
-
-        // var songtitle = _("songtitle").value;
-        var songtag = _("contenttype").value;
-        var songartist = _("songartist").value;
-        var songAlbum = _("songAlbum").value;
-        var songGenre = _("songGenre").value;
-
-
-
-        if (songAlbum == "") {
-            allsafe = false;
-            _("songAlbum").style.border = "1px solid red";
-            setTimeout(function() {
-                _("songAlbum").style.border = "1px solid white";
-            }, 2000)
-        }
-        if (songGenre == "") {
-            allsafe = false;
-            _("songGenre").style.border = "1px solid red";
-
-            setTimeout(function() {
-                _("songGenre").style.border = "1px solid white";
-            }, 2000)
-
-        } else {
-            _("songAlbum").style.border = "1px solid white";
-            _("songGenre").style.border = "1px solid white";
-
-        }
-
-        if (allsafe) {
-            _("songAlbum").style.border = "1px solid white";
-            _("songGenre").style.border = "1px solid white";
-            _("userfiles").style.border = "1px solid white";
-
-
-            formdata.append("username", "Patrick");
-
-            // formdata.append("songtile", songtitle);
-            formdata.append("songtag", songtag);
-            formdata.append("songartist", songartist);
-            formdata.append("songAlbum", songAlbum);
-            formdata.append("songGenre", songGenre);
-
-            $('.uploadoverview').css('display', 'grid');
-            $('#progressBar').css('display', 'block');
-
-            var ajax = new XMLHttpRequest();
-            ajax.upload.addEventListener("progress", progressHandler, false);
-            ajax.addEventListener("load", completeHandler, false);
-            ajax.open("POST", "parser");
-            ajax.send(formdata);
-        }
-
-
-
+        var ajax = new XMLHttpRequest();
+        ajax.upload.addEventListener("progress", progressHandler, false);
+        ajax.addEventListener("load", completeHandler, false);
+        ajax.open("POST", "singleupload");
+        ajax.send(formData);
     }
+
 
     function progressHandler(event) {
         _("loaded_n_total").innerHTML = "(UpLoaded " + Math.round(event.loaded * 0.000001) + " / " + Math.round(event
@@ -146,7 +128,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 //Our select statement. This will retrieve the data that we want.
 $sqlgenre = "SELECT id, name FROM genres  ORDER BY `genres`.`name` ASC";
 
-$sqlalbum = "SELECT id, title From albums WHERE artist='$artistid'";
+$sqlalbum = "SELECT id, title From albums WHERE artist='$artistid' AND tag='$mediaTag'";
 //ordeer
 
 
@@ -175,35 +157,109 @@ $albums = $stmtalbum->fetchAll();
 <div class="create_media_container">
 
     <div class="mediaCreationheading" style="text-align: center;">
-        <h5>Singles</h5>
-        <p style="font-size: 0.7em;color: #8b7097;">Create & Manage Singles </p>
+        <h5>Media Container Creation Form</h5>
+        <p style="font-size: 0.7em;color: #8b7097;">Create Container for a single, EP, Album, Mixtape or Podcast </p>
         <!-- <h5>EP (Extended Play) Creation Form</h5> -->
 
     </div>
-    <div class="manage_add_create">
+    <div class="loginforminner  slide-in-right">
 
-    <div class="statistics">
-                    <div onclick="openPage('uploadcollection?tag=music')" class="card" style="background: #560083; color: #fff;">
-                        <div class="illustration">
-                            <img src="images/fluent_data-treemap-20-filled.svg" alt="">
-                        </div>
-                        <div class="stats">
-                                <p class="label" style="color: #fff">New Single</p>
-                        </div>
-
-                    </div>
-                    <div onclick="openPage('uploadmedia?tag=music')" class="card" style="background:#0d4e4e">
-                        <div class="illustration">
-                            <img src="images/fontisto_shopping-basket.svg" alt="">
-                        </div>
-                        <div class="stats">
-                            <p class="label" style="color: #fff">Add Track to Single</p>
-                        </div>
-                    </div>
+        <!-- Display response messages -->
+        <?php if (!empty($resMessage)) { ?>
+            <div class=" alert <?php echo $resMessage['status'] ?>">
+                <?php echo $resMessage['message'] ?>
+            </div>
+        <?php } ?>
 
 
+        <form enctype="multipart/form-data" method="post" id="upload_form">
+
+            <div class="inputformelement" style="display: none;">
+                <input type="text" name="contenttype" class="inputarea disabledinput" readonly="" id="contenttype" aria-describedby="nameHelp" value="<?= $mediaTag ?>">
+            </div>
+
+            <div class="inputformelement" style="display: none;">
+                <label class="submitedlable" for="mediaArtist">Creator</label>
+                <select name="artistselect" id="mediaArtist" class="mediauploadInput">
+                    <option selected value="<?= $artistid; ?>"><?= $artistname ?></option>
+                </select>
+            </div>
+
+            <div class="inputformelement">
+                <label class="submitedlable" for="trackTitle">Track Title <span class="required">*</span></label>
+                <input type="text" name="trackTitle" required class="mediauploadInput" id="trackTitle" aria-describedby="nameHelp" placeholder="Enter Track Title">
+            </div>
+
+            <div class="inputformelement">
+                <label class="submitedlable" for="AlbumTitle">Album / Ep Name <span class="required">*</span></label>
+                <input type="text" name="AlbumTitle" required class="mediauploadInput" id="AlbumTitle" aria-describedby="nameHelp" placeholder="Enter Album / EP Name">
+            </div>
+
+
+            <div class="inputformelement">
+                <label class="submitedlable" for="mediaGenre">Genre <span class="required">*</span></label>
+                <select id="mediaGenre" required class="mediauploadInput">
+                    <option value="">Choose Genre</option>
+                    <?php foreach ($genres as $genre) : ?>
+                        <option value="<?= $genre['id']; ?>"><?= $genre['name']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+
+            <div class="inputformelement">
+
+                <div class="custom-file">
+                    <label class="submitedlable" for="releaseDate">Release Date & Time <span class="required">*</span></label>
+
+                    <input type="datetime-local" name="releaseDate" id="releaseDate" class="mediaFileinput" >
 
                 </div>
+            </div>
 
+
+            <div class="inputformelement">
+
+                <div class="custom-file">
+                    <label class="submitedlable" for="artWorkPath">Track Artwork <span class="required">*</span></label>
+
+                    <input type="file" id="artWorkPath" name="artWorkPath" class="mediaFileinput" accept=".jpg, .png, .jpeg" type="file">
+
+                </div>
+            </div>
+
+
+
+            <div class="inputformelement">
+
+                <div class="custom-file">
+                    <label class="submitedlable" for="trackPath">Track Path <span class="required">*</span></label>
+
+                    <input type="file" id="trackPath" name="trackPath" class="mediaFileinput" accept=".mp3"  type="file">
+
+                </div>
+            </div>
+
+
+            <div class="inputformelement">
+                <label for="mediaDescription" class="submitedlable">Description <span class="required">*</span></label>
+                <textarea type="textarea" rows="5" required name="mediaDescription" class="mediauploadInput" id="mediaDescription" aria-describedby="descriptionHelp" placeholder="Album Description"></textarea>
+            </div>
+
+            <input class="uploadtracksbtn" type="button" value="Create Container" onclick="saveSinglesToDB()">
+
+
+            <p class="helptext" style="margin-top: 1em;">+ This form Creates an empty Media container. Remember to Add tracks to this Container later</p>
+        </form>
     </div>
+</div>
+
+<div class="uploadoverview">
+    <div class="progressview">
+        <progress id="progressBar" value="0" max="100"></progress>
+
+        <h6 class="progressLoadingtext" id="status" wrap="hard"></h6>
+        <p id="loaded_n_total" class="progressupdateSize"></p>
+        <input class="uploadtracksbtn" type="button" value="Done" onclick="openPage('home')">
+    </div>
+
 </div>
