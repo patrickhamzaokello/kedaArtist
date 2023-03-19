@@ -99,10 +99,10 @@ function addTrackContainer($album_artWorkFile, $albumtage, $conn, $id, $albumTit
         if ($stmt->execute()) {
             echo $albumTitle . "<span class='checkeddone' style='color: green; font-weight:bold;'> Done</span>" . "\n";
         } else {
-            echo "Media upload to Database Failed" . "\n";
+            echo "<span class='checkeddone' style='color: green; font-weight:bold;'>Media upload to Database Failed</span>" . "\n";
         }
     } else {
-        echo "Media Upload Failed. Try again" . "\n";
+        echo "<span class='checkeddone' style='color: green; font-weight:bold;'>Media Upload Failed. Try again</span>" . "\n";
     }
 
 
@@ -157,7 +157,7 @@ function addTrack($conn, $trackFile, $track_title, $track_tag, $album_id, $track
         return;
     }
 
-    // Check if album with provided id already exists
+    // Check if track with provided title, artist and album already exists
     $checkduplicate = $conn->prepare("SELECT * FROM songs WHERE title=:title AND artist=:artist AND album=:album");
     $checkduplicate->execute(array(':title' => $track_title,':artist'=> $track_Artist,':album'=> $album_id));
     if ($checkduplicate->rowCount() >= 1) {
@@ -166,7 +166,7 @@ function addTrack($conn, $trackFile, $track_title, $track_tag, $album_id, $track
     }
 
 
-// Move album artwork file to target folder
+// Move track audio file to target folder
     if (move_uploaded_file($trackFile['tmp_name'], $target_file)) {
 
         $sql = "SELECT COALESCE(MAX(albumOrder) + 1, 1) AS albumOrder FROM songs WHERE album = :album";
@@ -176,7 +176,7 @@ function addTrack($conn, $trackFile, $track_title, $track_tag, $album_id, $track
 
         echo $albumOrder;
 
-        // Insert album information into database
+        // Insert track information into database
         $sql = "INSERT INTO songs (title,artist,album,genre,path,albumOrder,releaseDate,tag) VALUES (:title, :artist, :album, :genre, :trackFilePath, :albumOrder, :releaseDate, :tag)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':title', $track_title);
@@ -191,10 +191,10 @@ function addTrack($conn, $trackFile, $track_title, $track_tag, $album_id, $track
         if ($stmt->execute()) {
             echo $track_title . "<span class='checkeddone' style='color: green; font-weight:bold;'> Track Uploaded Successfully</span>" . "\n";
         } else {
-            echo "Media upload to Database Failed" . "\n";
+            echo "<span class='checkeddone' style='color: green; font-weight:bold;'> Audio upload to Database Failed</span>" . "\n";
         }
     } else {
-        echo "Media Upload Failed. Try again" . "\n";
+        echo "<span class='checkeddone' style='color: green; font-weight:bold;'> Audio Upload Failed. Try again</span>" . "\n";
     }
 
 
