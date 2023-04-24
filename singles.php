@@ -52,10 +52,39 @@ function clean($string)
     return preg_replace('/-+/', '-', $string); // Replaces multiple hyphens with single one.
 }
 
+
+//Our select statement. This will retrieve the data that we want.
+$sqlgenre = "SELECT id, name FROM genres  ORDER BY `genres`.`name` ASC";
+
+//Our select statement. This will retrieve all the artists from the database
+$sqlartists = "SELECT id, name FROM artists  ORDER BY `artists`.`name` ASC";
+
+// Albums
+$sqlalbum = "SELECT id, title From albums WHERE artist='$artistid' AND tag='$mediaTag'";
+
+
+
+//Prepare the select statement.
+$stmtgrenre = $conn->prepare($sqlgenre);
+$stmtartist = $conn->prepare($sqlartists);
+$stmtalbum = $conn->prepare($sqlalbum);
+
+//Execute the statement.
+$stmtgrenre->execute();
+$stmtartist->execute();
+$stmtalbum->execute();
+
+
+//Retrieve the rows using fetchAll.
+$genres = $stmtgrenre->fetchAll();
+$artists = $stmtartist->fetchAll();
+$albums = $stmtalbum->fetchAll();
+
 ?>
 
 
 <script>
+
     function _(id) {
         return document.getElementById(id);
     }
@@ -73,12 +102,14 @@ function clean($string)
         var artWorkPath = _("artWorkPath").files[0];
         var trackPath = _("trackPath").files[0];
         var mediaDescription = _("mediaDescription").value;
+        var featuredArtists = _("saveFeaturedArtists").value;
+        var songLabels = _("songLabel").value;
+        
 
         const firstThreeLetters = Math.floor(Math.random() * 1000).toString().substr(0, 3);
         const mediaAlbumID = "m_al" + Date.now().toString(36) + firstThreeLetters;
 
-
-        console.log(contentType + "- "+mediaAlbumID + "- "+ artistSelect + "- "+ trackTitle + "- "+ albumTitle + "- "+ mediaGenre + "- "+ releaseDate + "- "+ artWorkPath + "- "+ trackPath + "- "+ mediaDescription)
+        console.log(contentType + "- "+mediaAlbumID + "- "+ artistSelect + "- "+ trackTitle + "- "+ albumTitle + "- "+ mediaGenre + "- "+ releaseDate + "- "+ artWorkPath + "- "+ trackPath + "- "+ mediaDescription + "- "  +featuredArtists + "- " + songLabels)
 
         // Create a FormData object and append the input field values
         var formData = new FormData();
@@ -92,6 +123,8 @@ function clean($string)
         formData.append("artWorkPath", artWorkPath);
         formData.append("trackPath", trackPath);
         formData.append("mediaDescription", mediaDescription);
+        formData.append("featuredArtists", featuredArtists);
+        formData.append("songLabels", songLabels);
 
         // Create an XMLHttpRequest object and send a POST request to a PHP script
         $('.uploadoverview').css('display', 'grid');
@@ -120,38 +153,87 @@ function clean($string)
         $('#progressBar').css('display', 'none');
 
     }
+
+
+    var selectedArtists = [];
+    var selectedOptions = [];
+    var selectedOptionsField = document.getElementById("selectedArtistsField");
+    
+
+    // Function to save the selected featured aristst
+    function saveSelectedArtist() {
+        
+        var select = document.getElementById("featuredArtist");
+
+        var selectedOptions = Array.from(select.selectedOptions).map(option => document.getElementById(`${option.value}`).innerText);
+        selectedArtists = selectedArtists.concat(selectedOptions);
+
+        console.log(selectedArtists);
+        // display initial selected options
+        selectedArtists.forEach(function(value) {
+            console.log(value);
+            addSelectedOption(value);
+        });
+
+    }
+
+
+    // function to add a selected option to the list
+    function addSelectedOption(value) {
+        // check if the value is already in the selectedOptions array
+        if (selectedOptions.indexOf(value) === -1) {
+            // create a new div element
+            var optionDiv = document.createElement("div");
+            optionDiv.classList.add("selectedOption");
+            optionDiv.classList.add("mediauploadInput");
+            optionDiv.innerHTML = value + " <button onclick=\"removeSelectedOption('" + value + "')\">X</button>";
+            selectedOptionsField.appendChild(optionDiv);
+            
+            // add the value to the selectedOptions array
+            selectedOptions.push(value);
+
+            document.getElementById("saveFeaturedArtists").setAttribute("value", selectedOptions.join(","));
+
+        }
+    }
+
+    
+
+    // function to remove a selected option from the list
+    function removeSelectedOption(value) {
+    // remove the div element corresponding to the selected option
+    var divToRemove = selectedOptionsField.querySelector("div:contains('" + value + "')");
+    selectedOptionsField.removeChild(divToRemove);
+    
+    // remove the value from the selectedOptions array
+    var indexToRemove = selectedOptions.indexOf(value);
+    selectedOptions.splice(indexToRemove, 1);
+    }
+
+
+    // function to remove selected option
+    function removeSelectedOption(value) {
+        selectedArtists = selectedArtists.filter(function(item) {
+        return item !== value;
+        });
+
+        updateSelectedOptionsField();
+
+    }
+
+    // function to update selected options field
+    function updateSelectedOptionsField() {
+        selectedOptionsField.innerHTML = "";
+        selectedArtists.forEach(function(value) {
+        var optionDiv = document.createElement("div");
+        optionDiv.classList.add("selectedOption mediauploadInput");
+        optionDiv.innerHTML = value + " <button onclick=\"removeSelectedOption('" + value + "')\">X</button>";
+        selectedOptionsField.appendChild(optionDiv);
+        });
+    }
+
+
 </script>
-
-
-<?php
-
-//Our select statement. This will retrieve the data that we want.
-$sqlgenre = "SELECT id, name FROM genres  ORDER BY `genres`.`name` ASC";
-
-$sqlalbum = "SELECT id, title From albums WHERE artist='$artistid' AND tag='$mediaTag'";
-//ordeer
-
-
-//Prepare the select statement.
-$stmtgrenre = $conn->prepare($sqlgenre);
-$stmtalbum = $conn->prepare($sqlalbum);
-
-
-
-
-//Execute the statement.
-$stmtgrenre->execute();
-$stmtalbum->execute();
-
-
-//Retrieve the rows using fetchAll.
-$genres = $stmtgrenre->fetchAll();
-$albums = $stmtalbum->fetchAll();
-
-?>
-
-
-
 
 
 <div class="create_media_container">
@@ -192,6 +274,26 @@ $albums = $stmtalbum->fetchAll();
             <div class="inputformelement">
                 <label class="submitedlable" for="AlbumTitle">Track Album Name <span class="required">*</span></label>
                 <input type="text" name="AlbumTitle" required class="mediauploadInput" id="AlbumTitle" aria-describedby="nameHelp" placeholder="Track Album Name">
+            </div>
+            
+
+            <input type="text" name="saveFeaturedArtists" required readonly hidden id="saveFeaturedArtists" aria-describedby="nameHelp" >
+
+
+            <div class="inputformelement">
+                <label class="submitedlable" for="featuredArtist"> Featuring <span class="required">*</span></label>
+                <div id="selectedArtistsField"> <!-- selected options will be added here --> </div>
+                <select id="featuredArtist" required class="mediauploadInput" onchange="saveSelectedArtist()">
+                    <option value="">Choose Artist </option>
+                    <?php foreach ($artists as $artist) : ?>
+                        <option id = "<?= $artist['id']; ?>" value="<?= $artist['id']; ?>"><?= $artist['name']; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            
+            <div class="inputformelement">
+                <label class="submitedlable" for="songLabel"> Label <span class="required">*</span></label>
+                <input type="text" name="songLabel" required class="mediauploadInput" id="songLabel" aria-describedby="nameHelp" placeholder="Track Label">
             </div>
 
 
