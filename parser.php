@@ -133,7 +133,6 @@ if (isset($_POST["songartist"])) {
 
                     if ($query) {
                         echo "Done";
-
                         echo
                         $albumtitle . "<span class='checkeddone' style='color: green; font-weight:bold;'> Done</span>" . "\n";
                     } else {

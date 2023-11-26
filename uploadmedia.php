@@ -134,7 +134,7 @@ function clean($string) {
             var ajax = new XMLHttpRequest();
             ajax.upload.addEventListener("progress", progressHandler, false);
             ajax.addEventListener("load", completeHandler, false);
-            ajax.open("POST", "parser");
+            ajax.open("POST", "https://upload.mwonya.com/process-upload");
             ajax.send(formdata);
         }
 
