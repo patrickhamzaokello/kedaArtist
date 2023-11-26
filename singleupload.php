@@ -15,6 +15,8 @@ $album_id = sanitizeFormInput($_POST['album_id']);
 $genreId = sanitizeFormInput($_POST['mediaGenre']);
 $releaseDate = sanitizeFormInput($_POST['releaseDate']);
 $description = sanitizeFormInput($_POST['mediaDescription']);
+$featuredArtists = sanitizeFormInput($_POST['featuredArtists']);
+$songLabels = sanitizeFormInput($_POST['songLabels']);
 $artistId = sanitizeFormInput($_POST['artistselect']);
 $artWorkFile = $_FILES['artWorkPath'];
 $trackFile = $_FILES['trackPath'];
@@ -22,11 +24,11 @@ $trackTitle = sanitizeFormInput($_POST['trackTitle']);
 $tag = sanitizeFormInput($_POST["contenttype"]);
 
 
-addTrackContainer($conn, $artWorkFile, $tag, $album_id, $albumTitle, $artistId, $genreId, $releaseDate, $description, $trackFile,$trackTitle);
+addTrackContainer($conn, $artWorkFile, $tag, $album_id, $albumTitle, $artistId, $genreId, $releaseDate, $description, $featuredArtists, $songLabels, $trackFile,$trackTitle);
 
 
 
-function addTrackContainer($conn, $album_artWorkFile, $tag, $album_id, $albumTitle, $albumArtist, $albumGenre, $release, $albumDescription, $trackFile, $track_title)
+function addTrackContainer($conn, $album_artWorkFile, $tag, $album_id, $albumTitle, $albumArtist, $albumGenre, $release, $albumDescription, $featuredArtists, $songLabels, $trackFile, $track_title)
 {
 
 // Check if album tag is provided
@@ -136,7 +138,7 @@ function addTrackContainer($conn, $album_artWorkFile, $tag, $album_id, $albumTit
                 $albumOrder = $stmt->fetch(PDO::FETCH_ASSOC)['albumOrder'];
 
                 // Insert track information into database
-                $sql = "INSERT INTO songs (title,artist,album,genre,path,albumOrder,releaseDate,tag) VALUES (:title, :artist, :album, :genre, :trackFilePath, :albumOrder, :releaseDate, :tag)";
+                $sql = "INSERT INTO songs (title,artist,album,genre,path,albumOrder,releaseDate,tag, featuring, labels) VALUES (:title, :artist, :album, :genre, :trackFilePath, :albumOrder, :releaseDate, :tag, :featured, :songLabels)";
                 $stmt = $conn->prepare($sql);
                 $stmt->bindParam(':title', $track_title);
                 $stmt->bindParam(':artist', $albumArtist);
@@ -146,6 +148,8 @@ function addTrackContainer($conn, $album_artWorkFile, $tag, $album_id, $albumTit
                 $stmt->bindParam(':albumOrder', $albumOrder);
                 $stmt->bindParam(':releaseDate', $release);
                 $stmt->bindParam(':tag', $tag);
+                $stmt->bindParam(':featured', $featuredArtists);
+                $stmt->bindParam(':songLabels', $songLabels,);
 
                 if ($stmt->execute()) {
                     echo "<span class='checkeddone' style='color: green; font-weight:bold;'>".$track_title ."   Uploaded Successfully</span>" . "\n";
