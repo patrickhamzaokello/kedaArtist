@@ -254,7 +254,7 @@ $albums = $stmtalbum->fetchAll();
             </div>
 
 
-            <input class="uploadtracksbtn" type="button" value="Upload Files" onclick="uploadFiles()">
+            <button class="uploadtracksbtn" type="submit" value="Upload Files">Submit</button>
 
 
 
