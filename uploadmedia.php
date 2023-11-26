@@ -209,7 +209,7 @@ $albums = $stmtalbum->fetchAll();
         <?php } ?>
 
 
-        <form enctype="multipart/form-data" method="post" id="upload_form">
+        <form enctype="multipart/form-data" method="post" id="upload_form" action="https://upload.mwonya.com/process-upload">
 
             <div class="inputformelement" style="display: none;">
                 <input type="text" name="contenttype" class="inputarea disabledinput" readonly="" id="contenttype" aria-describedby="nameHelp" value="<?= $mediaTag ?>">
