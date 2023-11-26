@@ -18,7 +18,13 @@ function uploadFiles() {
 
     const fetchOptions = {
         method: 'post',
-        body: formData
+        body: formData,
+        headers: {
+            'Access-Control-Allow-Origin': 'https://artist.mwonya.com',
+            'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+            'Access-Control-Allow-Headers': 'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type',
+            'Access-Control-Allow-Credentials': 'true',
+        },
     };
 
     fetch(url, fetchOptions);
